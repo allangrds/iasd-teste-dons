@@ -1,30 +1,104 @@
-# Talent test form
+# IASD | Teste de dons
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+Fornecer uma aplicação simples para que membros e frequentadores possam responder um questionário que identifica talentos/interesses em ministérios da igreja, gerando uma pontuação por departamento
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/allan-ramos-projects-199f71c9/v0-talent-test-form)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/vHTiRKuiA2G)
+## Sumário
 
-## Overview
+- [Pré-requisitos](#pré-requisitos)
+- [Como instalar](#como-instalar)
+- [Como executar localmente](#como-executar-o-projeto-localmente)
+- [Formato do JSON de perguntas](#como-funciona-o-json-das-perguntas)
+- [Como contribuir](#como-contribuir)
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+## Pré-requisitos
 
-## Deployment
+- Node.js (recomendado: >= 18.16.0)compatíveis.
+- pnpm >= 10.x
 
-Your project is live at:
 
-**[https://vercel.com/allan-ramos-projects-199f71c9/v0-talent-test-form](https://vercel.com/allan-ramos-projects-199f71c9/v0-talent-test-form)**
+## Como instalar
 
-## Build your app
+1. Clone este repositório:
 
-Continue building your app on:
+```bash
+git clone https://github.com/allangrds/iasd-teste-dons.git
+cd iasd-teste-dons
+```
 
-**[https://v0.app/chat/projects/vHTiRKuiA2G](https://v0.app/chat/projects/vHTiRKuiA2G)**
+2. Instale dependências:
 
-## How It Works
+```bash
+pnpm install
+```
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+## Como executar o projeto localmente
+
+Para rodar em modo de desenvolvimento:
+
+```bash
+pnpm dev
+# depois abra http://localhost:3000
+```
+
+Para gerar uma build de produção e servir:
+
+```bash
+pnpm build
+pnpm start
+```
+
+## Como funciona o JSON das perguntas
+
+As perguntas são definidas como um array de objetos. Cada pergunta possui um `id`, um `text` (enunciado) e um array `options` com as alternativas. Cada alternativa tem um `text` e um objeto `points` que mapeia departamentos para pontuações.
+
+Exemplo mínimo (um item):
+
+```json
+[
+	{
+		"id": 1,
+		"text": "Você gosta de planejar eventos espirituais ou de estudo?",
+		"options": [
+			{
+				"text": "Sim, organizo agendas e materiais",
+				"points": {
+					"Secretaria": 2
+				}
+			},
+			{
+				"text": "Prefiro conduzir estudos ou liderar discussões",
+				"points": {
+					"Ministério Pessoal": 2
+				}
+			}
+		]
+	}
+]
+```
+
+Campos:
+- id: número único da pergunta.
+- text: enunciado da pergunta.
+- options: array de alternativas.
+	- text: texto da alternativa.
+	- points: mapa onde a chave é o nome do departamento/ministério e o valor é a pontuação atribuída quando a alternativa é escolhida.
+
+No projeto existente, o arquivo com as perguntas está em `lib/quiz-data.ts` e segue esse esquema (tipado como `Question`).
+
+## Como contribuir
+
+1. Abra uma issue para discutir alterações maiores ou correções.
+2. Faça um fork e crie uma branch com a sua feature/bugfix:
+
+```bash
+git checkout -b feature/minha-melhora
+```
+
+3. Faça commits pequenos e claros. Ao terminar, envie um pull request para a branch `main` deste repositório.
+
+Dicas:
+- Mantenha o formato do JSON de perguntas ao adicionar novas entradas.
+- Rode `pnpm dev` localmente e verifique visualmente qualquer alteração de UI.
+- Se adicionar dependências, atualize o `pnpm-lock.yaml` (ou forneça instruções alternativas).
+
+---

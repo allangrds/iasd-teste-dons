@@ -9,7 +9,6 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "Teste de Dons Espirituais - IASD",
   description: "Descubra seus dons e talentos para servir na Igreja Adventista do Sétimo Dia",
-  generator: "v0.app",
 }
 
 export default function RootLayout({
