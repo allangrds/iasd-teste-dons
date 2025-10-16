@@ -242,7 +242,7 @@ export default function SpiritualGiftsTest() {
 
   if (stage === "intro") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50 flex items-center justify-center p-14">
+      <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50 flex items-center justify-center p-6 md:p-14">
         <Card className="w-full p-8 md:p-12 shadow-xl">
           <div className="text-center space-y-6">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sky-100 mb-4">
