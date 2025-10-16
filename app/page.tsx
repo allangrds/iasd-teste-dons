@@ -28,7 +28,7 @@ export default function SpiritualGiftsTest() {
   const formatPhoneNumber = (value: string) => {
     // Remove all non-numeric characters
     const numbers = value.replace(/\D/g, "")
-    
+
     // Apply mask based on length
     if (numbers.length <= 10) {
       // Landline: (11) 1234-5678
@@ -55,7 +55,7 @@ export default function SpiritualGiftsTest() {
       if (typeof window !== "undefined") {
         // Simulate minimum loading time for better UX
         await new Promise(resolve => setTimeout(resolve, 500))
-        
+
         const saved = localStorage.getItem("spiritualGiftsTest")
         if (saved) {
           try {
@@ -85,7 +85,7 @@ export default function SpiritualGiftsTest() {
       }
       setIsLoading(false)
     }
-    
+
     loadSavedData()
   }, [])
 
@@ -183,7 +183,7 @@ export default function SpiritualGiftsTest() {
     const skillScores: Record<string, number> = {}
     const departmentNames = Object.values(DEPARTMENTS).map((d) => d.name)
     const skillNames = Object.values(SKILLS).map((s) => s.name)
-    
+
     departmentNames.forEach((dept) => {
       departmentScores[dept] = 0
     })
@@ -210,7 +210,7 @@ export default function SpiritualGiftsTest() {
     const departments = Object.entries(departmentScores)
       .sort(([, a], [, b]) => b - a)
       .filter(([, score]) => score > 0)
-    
+
     const skills = Object.entries(skillScores)
       .sort(([, a], [, b]) => b - a)
       .filter(([, score]) => score > 0)
@@ -396,28 +396,32 @@ export default function SpiritualGiftsTest() {
             </div>
 
             <div className="space-y-6">
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-4">🌟 Suas principais áreas de atuação</h2>
-                <div className="space-y-4">
-                  {top3Departments.map(([dept, score], index) => (
-                    <div
-                      key={dept}
-                      className="bg-gradient-to-r from-sky-50 to-emerald-50 border-2 border-sky-200 rounded-lg p-6"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center gap-3">
-                          <span className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-600 text-white font-bold text-sm">
-                            {index + 1}
-                          </span>
-                          <h3 className="text-lg font-semibold text-slate-900">{dept}</h3>
+              {
+                top3Departments.length > 0 && (
+                  <div>
+                    <h2 className="text-xl font-semibold text-slate-900 mb-4">🌟 Suas principais áreas de atuação</h2>
+                    <div className="space-y-4">
+                      {top3Departments.map(([dept, score], index) => (
+                        <div
+                          key={dept}
+                          className="bg-gradient-to-r from-sky-50 to-emerald-50 border-2 border-sky-200 rounded-lg p-6"
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-3">
+                              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-600 text-white font-bold text-sm">
+                                {index + 1}
+                              </span>
+                              <h3 className="text-lg font-semibold text-slate-900">{dept}</h3>
+                            </div>
+                            <span className="text-2xl font-bold text-sky-600">{score}</span>
+                          </div>
+                          <Progress value={(score / top3Departments[0][1]) * 100} className="h-3" />
                         </div>
-                        <span className="text-2xl font-bold text-sky-600">{score}</span>
-                      </div>
-                      <Progress value={(score / top3Departments[0][1]) * 100} className="h-3" />
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
+                )
+              }
 
               {otherDepartments.length > 0 && (
                 <div>
@@ -477,7 +481,6 @@ export default function SpiritualGiftsTest() {
                   </div>
                 </div>
               )}
-              
             </div>
 
             <div className="mt-8 pt-8 border-t border-slate-200 space-y-4">
