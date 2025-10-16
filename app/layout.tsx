@@ -7,7 +7,7 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Teste de Dons Espirituais - IASD",
+  title: "IASD | Teste de Dons Espirituais",
   description: "Descubra seus dons e talentos para servir na Igreja Adventista do Sétimo Dia",
 }
 
