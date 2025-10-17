@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Inter, Merriweather } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+import { GoogleTagManager } from '@next/third-parties/google'
+
 import { ThemeProvider } from "@/components/theme-provider"
 import { Header } from "./components/header"
 import "./globals.css"
@@ -22,6 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${inter.variable} ${merriweather.variable} antialiased`} suppressHydrationWarning>
+      <GoogleTagManager gtmId="G-8BVLD8077L" />
       <body className="font-sans">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Header />
