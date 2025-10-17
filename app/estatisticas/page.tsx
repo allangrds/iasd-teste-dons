@@ -1,7 +1,7 @@
 "use client"
 
 import { Card } from "@/components/ui/card"
-import { Sparkles, ArrowLeft, BarChart3, ChevronDown, ChevronUp } from "lucide-react"
+import { ArrowLeft, BarChart3, ChevronDown, ChevronUp } from "lucide-react"
 import { DEPARTMENTS, SKILLS, QUESTIONS, QUESTION_TYPE } from "@/lib/quiz-data"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -241,158 +241,179 @@ export default function StatisticsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50 py-12 px-4">
+    <div className="min-h-screen bg-background py-12 px-4">
       <div className="max-w-5xl mx-auto space-y-8">
-        <Card className="p-8 md:p-12 shadow-xl">
-          <div className="space-y-8">
-            {/* Header */}
-            <div className="text-center space-y-4">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sky-100 mb-4">
-                <BarChart3 className="w-8 h-8 text-sky-600" />
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-0">
-                Estatísticas do Teste
-              </h1>
-              <p className="text-lg text-slate-600">
-                Análise completa de {QUESTIONS.length} perguntas, {departments.length} departamentos e {skills.length} habilidades
-              </p>
-            </div>
+        {/* Hero Section */}
+        <div className="text-center space-y-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+            Estatísticas do teste
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Análise completa de {QUESTIONS.length} perguntas, {departments.length} departamentos e {skills.length} habilidades
+          </p>
+        </div>
 
-            {/* Summary Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-gradient-to-br from-sky-50 to-sky-100 border-2 border-sky-200 rounded-lg p-6 text-center">
-                <div className="text-3xl font-bold text-sky-600 mb-2">{QUESTIONS.length}</div>
-                <div className="text-sm font-medium text-slate-700">Perguntas no Teste</div>
-              </div>
-              <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-200 rounded-lg p-6 text-center">
-                <div className="text-3xl font-bold text-emerald-600 mb-2">{departments.length}</div>
-                <div className="text-sm font-medium text-slate-700">Departamentos Avaliados</div>
-              </div>
-              <div className="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-200 rounded-lg p-6 text-center">
-                <div className="text-3xl font-bold text-purple-600 mb-2">{skills.length}</div>
-                <div className="text-sm font-medium text-slate-700">Habilidades Avaliadas</div>
-              </div>
-            </div>
+        {/* Summary Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card className="p-6 text-center shadow-xl">
+            <div className="text-3xl font-bold text-primary">{QUESTIONS.length}</div>
+            <div className="text-sm font-medium text-muted-foreground">Perguntas no Teste</div>
+          </Card>
+          <Card className="p-6 text-center shadow-xl">
+            <div className="text-3xl font-bold text-primary">{departments.length}</div>
+            <div className="text-sm font-medium text-muted-foreground">Departamentos Avaliados</div>
+          </Card>
+          <Card className="p-6 text-center shadow-xl">
+            <div className="text-3xl font-bold text-primary">{skills.length}</div>
+            <div className="text-sm font-medium text-muted-foreground">Habilidades Avaliadas</div>
+          </Card>
+        </div>
 
-            {/* Departments Statistics */}
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-semibold text-slate-900 flex items-center gap-2">
-                  <Sparkles className="w-6 h-6 text-sky-600" />
-                  Departamentos
-                </h2>
-                <button
-                  onClick={() => setShowDepartmentsSection(!showDepartmentsSection)}
-                  className="flex items-center gap-2 text-sm font-medium text-sky-600 hover:text-sky-700 transition-colors px-3 py-2 rounded-lg hover:bg-sky-50"
-                >
-                  {showDepartmentsSection ? (
-                    <>
-                      <ChevronUp className="w-4 h-4" />
-                      Ocultar todos
-                    </>
-                  ) : (
-                    <>
-                      <ChevronDown className="w-4 h-4" />
-                      Mostrar todos
-                    </>
-                  )}
-                </button>
-              </div>
-              {showDepartmentsSection && (
-                <div className="grid gap-4">
-                {departments.map((dept) => {
-                  const isExpanded = expandedDepts.has(dept.name)
-                  return (
-                    <div
-                      key={dept.name}
-                      className="bg-gradient-to-r from-sky-50 to-white border border-sky-200 rounded-lg overflow-hidden"
-                    >
-                      <div className="p-5 hover:bg-sky-50/50 transition-colors">
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
-                          <div className="flex-1 space-y-2">
-                            <h3 className="text-lg font-semibold text-slate-900">{dept.name}</h3>
-                            {dept.description && (
-                              <p className="text-sm text-slate-600">{dept.description}</p>
-                            )}
-                          </div>
-                          <div className="flex gap-6 md:gap-8 flex-shrink-0">
-                            <div className="text-center">
-                              <div className="text-2xl font-bold text-sky-600">{dept.questionCount}</div>
-                              <div className="text-xs text-slate-600 font-medium">
-                                {dept.questionCount === 1 ? "pergunta" : "perguntas"}
-                              </div>
+        {/* Departments Statistics */}
+        <Card className="p-6 shadow-xl">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-semibold text-foreground flex items-center gap-2">
+                <BarChart3 className="w-6 h-6 text-primary" />
+                Departamentos
+              </h2>
+              <button
+                onClick={() => setShowDepartmentsSection(!showDepartmentsSection)}
+                className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors px-3 py-2 rounded-lg hover:bg-accent"
+              >
+                {showDepartmentsSection ? (
+                  <>
+                    <ChevronUp className="w-4 h-4" />
+                    Ocultar todos
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="w-4 h-4" />
+                    Mostrar todos
+                  </>
+                )}
+              </button>
+            </div>
+            {showDepartmentsSection && (
+              <div className="grid gap-4">
+              {departments.map((dept) => {
+                const isExpanded = expandedDepts.has(dept.name)
+                return (
+                  <div
+                    key={dept.name}
+                    className="bg-accent border border-border rounded-lg overflow-hidden"
+                  >
+                    <div className="p-5 hover:bg-muted transition-colors">
+                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+                        <div className="flex-1 space-y-2">
+                          <h3 className="text-lg font-semibold text-foreground">{dept.name}</h3>
+                          {dept.description && (
+                            <p className="text-sm text-muted-foreground">{dept.description}</p>
+                          )}
+                        </div>
+                        <div className="flex gap-6 md:gap-8 flex-shrink-0">
+                          <div className="text-center">
+                            <div className="text-2xl font-bold text-primary">{dept.questionCount}</div>
+                            <div className="text-xs text-muted-foreground font-medium">
+                              {dept.questionCount === 1 ? "pergunta" : "perguntas"}
                             </div>
-                            <div className="text-center">
-                              <div className="text-2xl font-bold text-emerald-600">{dept.maxPoints}</div>
-                              <div className="text-xs text-slate-600 font-medium">
-                                {dept.maxPoints === 1 ? "ponto" : "pontos"}
-                              </div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-2xl font-bold text-primary">{dept.maxPoints}</div>
+                            <div className="text-xs text-muted-foreground font-medium">
+                              {dept.maxPoints === 1 ? "ponto" : "pontos"}
                             </div>
                           </div>
                         </div>
-                        
-                        {dept.questions.length > 0 && (
-                          <button
-                            onClick={() => toggleDepartment(dept.name)}
-                            className="mt-4 flex items-center gap-2 text-sm font-medium text-sky-600 hover:text-sky-700 transition-colors"
-                          >
-                            {isExpanded ? (
-                              <>
-                                <ChevronUp className="w-4 h-4" />
-                                Ocultar perguntas
-                              </>
-                            ) : (
-                              <>
-                                <ChevronDown className="w-4 h-4" />
-                                Ver {dept.questions.length} {dept.questions.length === 1 ? "pergunta" : "perguntas"}
-                              </>
-                            )}
-                          </button>
-                        )}
                       </div>
-
-                      {isExpanded && dept.questions.length > 0 && (
-                        <div className="border-t border-sky-200 bg-white p-5 space-y-4">
-                          {dept.questions.map((q) => (
-                            <div key={`${dept.name}-${q.id}`} className="space-y-2">
-                              <div className="flex items-start gap-2">
-                                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-sky-100 text-sky-700 text-xs font-bold flex-shrink-0">
-                                  {q.id}
-                                </span>
-                                <div className="flex-1">
-                                  <p className="text-sm font-medium text-slate-900">{q.text}</p>
-                                  <p className="text-xs text-slate-500 mt-1">{getQuestionTypeLabel(q.type)}</p>
-                                </div>
-                              </div>
-                              <div className="ml-8 space-y-1">
-                                {q.options.map((opt, idx) => (
-                                  <div
-                                    key={idx}
-                                    className="flex items-center justify-between text-sm bg-slate-50 rounded px-3 py-2"
-                                  >
-                                    <span className="text-slate-700">{opt.text}</span>
-                                    <span className="font-semibold text-emerald-600">
-                                      +{opt.points} {opt.points === 1 ? "ponto" : "pontos"}
-                                    </span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
+                      
+                      {dept.questions.length > 0 && (
+                        <button
+                          onClick={() => toggleDepartment(dept.name)}
+                          className="mt-4 flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                        >
+                          {isExpanded ? (
+                            <>
+                              <ChevronUp className="w-4 h-4" />
+                              Ocultar perguntas
+                            </>
+                          ) : (
+                            <>
+                              <ChevronDown className="w-4 h-4" />
+                              Ver {dept.questions.length} {dept.questions.length === 1 ? "pergunta" : "perguntas"}
+                            </>
+                          )}
+                        </button>
                       )}
                     </div>
-                  )
-                })}
-              </div>
-              )}
-            </div>
 
-            {/* Skills Statistics */}
+                    {isExpanded && dept.questions.length > 0 && (
+                      <div className="border-t border-border bg-card p-5 space-y-4">
+                        {dept.questions.map((q) => (
+                          <div key={`${dept.name}-${q.id}`} className="space-y-2">
+                            <div className="flex items-start gap-2">
+                              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex-shrink-0">
+                                {q.id}
+                              </span>
+                              <div className="flex-1">
+                                <p className="text-sm font-medium text-foreground">{q.text}</p>
+                                <p className="text-xs text-muted-foreground mt-1">{getQuestionTypeLabel(q.type)}</p>
+                              </div>
+                            </div>
+                            <div className="ml-8 space-y-1">
+                              {q.options.map((opt, idx) => (
+                                <div
+                                  key={idx}
+                                  className="flex items-center justify-between text-sm bg-muted rounded px-3 py-2"
+                                >
+                                  <span className="text-foreground">{opt.text}</span>
+                                  <span className="font-semibold text-primary">
+                                    +{opt.points} {opt.points === 1 ? "ponto" : "pontos"}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+            )}
+          </div>
+        </Card>
+
+        {/* Skills Statistics */}
+        <Card className="p-6 shadow-xl">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-semibold text-foreground flex items-center gap-2">
+                <BarChart3 className="w-6 h-6 text-primary" />
+                Habilidades
+              </h2>
+              <button
+                onClick={() => setShowSkillsSection(!showSkillsSection)}
+                className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors px-3 py-2 rounded-lg hover:bg-accent"
+              >
+                {showSkillsSection ? (
+                  <>
+                    <ChevronUp className="w-4 h-4" />
+                    Ocultar todos
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="w-4 h-4" />
+                    Mostrar todos
+                  </>
+                )}
+              </button>
+            </div>            {/* Skills Statistics */}
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-semibold text-slate-900 flex items-center gap-2">
-                  <Sparkles className="w-6 h-6 text-purple-600" />
+                  <BarChart3 className="w-6 h-6 text-purple-600" />
                   Habilidades
                 </h2>
                 <button

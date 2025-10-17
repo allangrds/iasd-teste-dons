@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Progress } from "@/components/ui/progress"
-import { ChevronLeft, ChevronRight, Mail, Sparkles, RotateCcw, User, Phone } from "lucide-react"
+import { ChevronLeft, ChevronRight, Mail, RotateCcw, User, Phone } from "lucide-react"
 import { DEPARTMENTS, SKILLS, QUESTIONS, QUESTION_TYPE } from "@/lib/quiz-data"
 
 const questions = QUESTIONS
@@ -228,18 +228,18 @@ export default function SpiritualGiftsTest() {
   // Loading screen
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="p-8 shadow-xl">
           <div className="text-center space-y-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sky-100 animate-pulse">
-              <Sparkles className="w-8 h-8 text-sky-600 animate-spin" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted animate-pulse">
+              <div className="w-8 h-8 rounded-full border-4 border-primary border-t-transparent animate-spin" />
             </div>
             <div className="space-y-2">
-              <p className="text-lg font-semibold text-slate-900">Carregando</p>
-              <p className="text-sm text-slate-600">Verificando dados salvos...</p>
+              <p className="text-lg font-semibold text-foreground">Carregando</p>
+              <p className="text-sm text-muted-foreground">Verificando dados salvos...</p>
             </div>
-            <div className="w-48 h-1 bg-slate-200 rounded-full overflow-hidden">
-              <div className="h-full bg-sky-600 rounded-full animate-pulse" style={{ width: '60%' }}></div>
+            <div className="w-48 h-1 bg-muted rounded-full overflow-hidden">
+              <div className="h-full bg-primary rounded-full animate-pulse" style={{ width: '60%' }}></div>
             </div>
           </div>
         </Card>
@@ -249,70 +249,75 @@ export default function SpiritualGiftsTest() {
 
   if (stage === "intro") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50 flex items-center justify-center p-6 md:p-14">
-        <Card className="w-full p-8 md:p-12 shadow-xl">
-          <div className="text-center space-y-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sky-100 mb-4">
-              <Sparkles className="w-8 h-8 text-sky-600" />
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-balance text-slate-900 mb-0">Teste de Dons Espirituais</h1>
-            <p className="text-lg text-slate-600 leading-relaxed">
-              Descubra seus dons e talentos para servir
+      <div className="min-h-screen bg-background flex items-center justify-center p-6 md:p-14">
+        <div className="w-full max-w-4xl space-y-8">
+          {/* Hero Section - sem card */}
+          <div className="text-center space-y-6 py-12">
+            <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight mb-0">
+              Descubra seus <span className="text-[#0EA5E9]">dons</span>
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Para quem deseja servir na igreja, é fundamental conhecer seus dons espirituais
             </p>
+          </div>
 
-            <div className="space-y-4 text-left bg-slate-50 rounded-lg p-6">
-              <h2 className="font-semibold text-slate-900">Como funciona:</h2>
-              <ul className="space-y-2 text-slate-600">
-                <li className="flex gap-2">
-                  <span className="text-sky-600 font-semibold">1.</span>
-                  Responda cada pergunta selecionando as opções que mais se identificam com você
+          {/* Cards de Conteúdo */}
+          <div className="space-y-6">
+            <Card className="p-6 shadow-xl">
+              <h2 className="font-semibold text-foreground mb-4">Como funciona:</h2>
+              <ul className="space-y-3 text-muted-foreground">
+                <li className="flex gap-3">
+                  <span className="text-primary font-semibold">1.</span>
+                  <span>Responda cada pergunta selecionando as opções que mais se identificam com você</span>
                 </li>
-                <li className="flex gap-2">
-                  <span className="text-sky-600 font-semibold">2.</span>
-                  Você pode pular perguntas se preferir
+                <li className="flex gap-3">
+                  <span className="text-primary font-semibold">2.</span>
+                  <span>Você pode pular perguntas se preferir</span>
                 </li>
-                <li className="flex gap-2">
-                  <span className="text-sky-600 font-semibold">3.</span>
-                  Ao final, descubra suas principais áreas de atuação
+                <li className="flex gap-3">
+                  <span className="text-primary font-semibold">3.</span>
+                  <span>Ao final, descubra suas principais áreas de atuação</span>
                 </li>
               </ul>
-            </div>
+            </Card>
 
-            <div className="space-y-4 text-left bg-sky-50 rounded-lg p-6 border border-sky-200">
-              <div>
-                <h2 className="font-semibold text-slate-900 mb-2">Habilidades analisadas neste teste:</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-700">
-                  {Object.values(SKILLS)
-                    .sort((a, b) => a.name.localeCompare(b.name))
-                    .map((d, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-sky-600 flex-shrink-0" />
-                        <span>{d.name}</span>
-                      </div>
-                    ))}
-                </div>
-              </div>
-              <hr />
-              <div>
-                <h2 className="font-semibold text-slate-900 mb-2">Departamentos analisados neste teste:</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-700">
-                  {Object.values(DEPARTMENTS)
-                    .sort((a, b) => a.name.localeCompare(b.name))
-                    .map((d, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-sky-600 flex-shrink-0" />
-                        <span>{d.name}</span>
-                      </div>
-                    ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4 text-left bg-slate-50 rounded-lg p-6">
-              <h2 className="font-semibold text-slate-900 mb-4">Seus Dados:</h2>
+            <Card className="p-6 shadow-xl">
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
+                  <h2 className="font-semibold text-foreground mb-3">Habilidades analisadas neste teste:</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-muted-foreground">
+                    {Object.values(SKILLS)
+                      .sort((a, b) => a.name.localeCompare(b.name))
+                      .map((d, index) => (
+                        <div key={index} className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                          <span>{d.name}</span>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+                <hr className="border-border" />
+                <div>
+                  <h2 className="font-semibold text-foreground mb-3">Departamentos analisados neste teste:</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-muted-foreground">
+                    {Object.values(DEPARTMENTS)
+                      .sort((a, b) => a.name.localeCompare(b.name))
+                      .map((d, index) => (
+                        <div key={index} className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                          <span>{d.name}</span>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="p-6 shadow-xl">
+              <h2 className="font-semibold text-foreground mb-4">Seus Dados:</h2>
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                     Nome completo *
                   </label>
                   <input
@@ -320,13 +325,13 @@ export default function SpiritualGiftsTest() {
                     id="name"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
-                    className="w-full px-4 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+                    className="w-full px-4 py-2 bg-card border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent text-foreground"
                     placeholder="Digite seu nome completo"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                     E-mail
                   </label>
                   <input
@@ -334,12 +339,12 @@ export default function SpiritualGiftsTest() {
                     id="email"
                     value={userEmail}
                     onChange={(e) => setUserEmail(e.target.value)}
-                    className="w-full px-4 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+                    className="w-full px-4 py-2 bg-card border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent text-foreground"
                     placeholder="seu@email.com"
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
                     Telefone
                   </label>
                   <input
@@ -347,19 +352,19 @@ export default function SpiritualGiftsTest() {
                     id="phone"
                     value={userPhone}
                     onChange={handlePhoneChange}
-                    className="w-full px-4 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+                    className="w-full px-4 py-2 bg-card border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent text-foreground"
                     placeholder="(11) 91234-5678"
                   />
                 </div>
               </div>
-            </div>
+            </Card>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button
                 onClick={() => setStage("test")}
                 disabled={!userName}
                 size="lg"
-                className="w-full sm:w-auto bg-sky-600 hover:bg-sky-700 text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+                className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Iniciar Teste
                 <ChevronRight className="ml-2 w-4 h-4" />
@@ -368,23 +373,23 @@ export default function SpiritualGiftsTest() {
                 onClick={() => window.location.href = '/estatisticas'}
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto border-slate-300 cursor-pointer"
+                className="w-full sm:w-auto border-border cursor-pointer"
               >
                 Ver Estatísticas
               </Button>
             </div>
 
-            <div className="flex items-center justify-center gap-2 text-sm text-slate-500 pt-4">
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground pt-6">
               <Mail className="w-4 h-4" />
               <span>
                 Sugestões:{" "}
-                <a href="mailto:esseemail@email.com" className="text-sky-600 hover:underline cursor-pointer">
+                <a href="mailto:esseemail@email.com" className="text-primary hover:underline cursor-pointer">
                   esseemail@email.com
                 </a>
               </span>
             </div>
           </div>
-        </Card>
+        </div>
       </div>
     )
   }
@@ -397,223 +402,216 @@ export default function SpiritualGiftsTest() {
     const otherSkills = skills.slice(3)
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50 py-12 px-4">
+      <div className="min-h-screen bg-background py-12 px-4">
         <div className="max-w-4xl mx-auto space-y-8">
-          <Card className="p-8 md:p-12 shadow-xl">
-            <div className="text-center space-y-4 mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 mb-4">
-                <Sparkles className="w-8 h-8 text-emerald-600" />
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-0">Seus Resultados</h1>
-              <p className="text-lg text-slate-600">Descubra onde seus dons podem fazer a diferença</p>
-            </div>
+          {/* Hero Section */}
+          <div className="text-center space-y-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+              Seus resultados
+            </h1>
+            <p className="text-lg text-muted-foreground">Descubra onde seus dons podem fazer a diferença</p>
+          </div>
 
-            {/* User Information Section */}
-            {(userName || userEmail || userPhone) && (
-              <div className="mb-8 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl border-2 border-slate-200 overflow-hidden">
-                <div className="bg-gradient-to-r from-sky-600 to-emerald-600 px-6 py-3">
-                  <h2 className="font-semibold text-white text-lg flex items-center gap-2">
-                    <User className="w-5 h-5" />
-                    Informações do Participante
-                  </h2>
-                </div>
-                <div className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {userName && (
-                      <div className="flex items-center gap-3 p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
-                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center">
-                          <User className="w-5 h-5 text-sky-600" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">Nome</p>
-                          <p className="text-sm font-semibold text-slate-900 truncate">{userName}</p>
-                        </div>
-                      </div>
-                    )}
-                    {userEmail && (
-                      <div className="flex items-center gap-3 p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
-                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
-                          <Mail className="w-5 h-5 text-emerald-600" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">E-mail</p>
-                          <p className="text-sm font-semibold text-slate-900 truncate">{userEmail}</p>
-                        </div>
-                      </div>
-                    )}
-                    {userPhone && (
-                      <div className="flex items-center gap-3 p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
-                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
-                          <Phone className="w-5 h-5 text-purple-600" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">Telefone</p>
-                          <p className="text-sm font-semibold text-slate-900 truncate">{userPhone}</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            <div className="space-y-6">
-              {
-                top3Departments.length > 0 && (
-                  <div>
-                    <h2 className="text-xl font-semibold text-slate-900 mb-4">🌟 Suas principais áreas de atuação</h2>
-                    <div className="space-y-4">
-                      {top3Departments.map(([dept, score], index) => {
-                        const deptKey = Object.keys(DEPARTMENTS).find(key => DEPARTMENTS[key as keyof typeof DEPARTMENTS].name === dept)
-                        const description = deptKey ? DEPARTMENTS[deptKey as keyof typeof DEPARTMENTS].description : undefined
-                        
-                        return (
-                          <div
-                            key={dept}
-                            className="bg-gradient-to-r from-sky-50 to-emerald-50 border-2 border-sky-200 rounded-lg p-6"
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <div className="flex items-center gap-3">
-                                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-600 text-white font-bold text-sm">
-                                  {index + 1}
-                                </span>
-                                <div>
-                                  <h3 className="text-lg font-semibold text-slate-900">{dept}</h3>
-                                  {description && (
-                                    <p className="text-sm text-slate-600">{description}</p>
-                                  )}
-                                </div>
-                              </div>
-                              <span className="text-2xl font-bold text-sky-600">{score}</span>
-                            </div>
-                            <div className="mt-4">
-                              <Progress value={(score / top3Departments[0][1]) * 100} className="h-3" />
-                            </div>
-                          </div>
-                        )
-                      })}
+          {/* User Information Card */}
+          {(userName || userEmail || userPhone) && (
+            <Card className="p-6 shadow-xl">
+              <h2 className="font-semibold text-foreground text-lg mb-4 flex items-center gap-2">
+                <User className="w-5 h-5" />
+                Informações do Participante
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {userName && (
+                  <div className="flex items-center gap-3 p-4 bg-muted rounded-lg border border-border">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                      <User className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Nome</p>
+                      <p className="text-sm font-semibold text-foreground truncate">{userName}</p>
                     </div>
                   </div>
-                )
-              }
-
-              {otherDepartments.length > 0 && (
-                <div>
-                  <h2 className="text-xl font-semibold text-slate-900 mb-4">Outras áreas identificadas</h2>
-                  <div className="grid gap-3">
-                    {otherDepartments.map(([dept, score]) => {
-                      const deptKey = Object.keys(DEPARTMENTS).find(key => DEPARTMENTS[key as keyof typeof DEPARTMENTS].name === dept)
-                      const description = deptKey ? DEPARTMENTS[deptKey as keyof typeof DEPARTMENTS].description : undefined
-                      
-                      return (
-                        <div
-                          key={dept}
-                          className="bg-slate-50 border border-slate-200 rounded-lg p-4 flex items-center justify-between"
-                        >
-                          <div className="flex-1">
-                            <span className="font-medium text-slate-700">{dept}</span>
-                            {description && (
-                              <p className="text-sm text-slate-600 mt-1">{description}</p>
-                            )}
-                          </div>
-                          <span className="text-lg font-semibold text-slate-600 ml-4">{score}</span>
-                        </div>
-                      )
-                    })}
+                )}
+                {userEmail && (
+                  <div className="flex items-center gap-3 p-4 bg-muted rounded-lg border border-border">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Mail className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">E-mail</p>
+                      <p className="text-sm font-semibold text-foreground truncate">{userEmail}</p>
+                    </div>
                   </div>
-                </div>
-              )}
-
-              {top3Skills.length > 0 && (
-                <div>
-                  <h2 className="text-xl font-semibold text-slate-900 mb-4">🌟 Suas principais habilidades</h2>
-                  <div className="space-y-4">
-                    {top3Skills.map(([skill, score], index) => {
-                      const skillKey = Object.keys(SKILLS).find(key => SKILLS[key as keyof typeof SKILLS].name === skill)
-                      const description = skillKey ? SKILLS[skillKey as keyof typeof SKILLS].description : undefined
-                      
-                      return (
-                        <div
-                          key={skill}
-                          className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-lg p-6"
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center gap-3">
-                              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-600 text-white font-bold text-sm">
-                                {index + 1}
-                              </span>
-                              <div>
-                                <h3 className="text-lg font-semibold text-slate-900">{skill}</h3>
-                                {description && (
-                                  <p className="text-sm text-slate-600 mt-1">{description}</p>
-                                )}
-                              </div>
-                            </div>
-                            <span className="text-2xl font-bold text-purple-600">{score}</span>
-                          </div>
-                          <div className="mt-4">
-                            <Progress value={(score / top3Skills[0][1]) * 100} className="h-3" />
-                          </div>
-                        </div>
-                      )
-                    })}
+                )}
+                {userPhone && (
+                  <div className="flex items-center gap-3 p-4 bg-muted rounded-lg border border-border">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Phone className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Telefone</p>
+                      <p className="text-sm font-semibold text-foreground truncate">{userPhone}</p>
+                    </div>
                   </div>
-                </div>
-              )}
-
-              {otherSkills.length > 0 && (
-                <div>
-                  <h2 className="text-xl font-semibold text-slate-900 mb-4">Outras habilidades identificadas</h2>
-                  <div className="grid gap-3">
-                    {otherSkills.map(([skill, score]) => {
-                      const skillKey = Object.keys(SKILLS).find(key => SKILLS[key as keyof typeof SKILLS].name === skill)
-                      const description = skillKey ? SKILLS[skillKey as keyof typeof SKILLS].description : undefined
-                      
-                      return (
-                        <div
-                          key={skill}
-                          className="bg-slate-50 border border-slate-200 rounded-lg p-4 flex items-center justify-between"
-                        >
-                          <div className="flex-1">
-                            <span className="font-medium text-slate-700">{skill}</span>
-                            {description && (
-                              <p className="text-sm text-slate-600 mt-1">{description}</p>
-                            )}
-                          </div>
-                          <span className="text-lg font-semibold text-slate-600 ml-4">{score}</span>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className="mt-8 pt-8 border-t border-slate-200 space-y-4">
-              {/* <p className="text-slate-600 text-center">
-                Converse com os líderes da sua igreja para descobrir como você pode usar seus dons para servir!
-              </p> */}
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button
-                  onClick={handleResetTest}
-                  variant="outline"
-                  className="border-slate-300 cursor-pointer"
-                >
-                  Refazer Teste
-                </Button>
-                <Button onClick={() => window.print()} className="bg-sky-600 hover:bg-sky-700 cursor-pointer">
-                  Imprimir Resultados
-                </Button>
+                )}
               </div>
+            </Card>
+          )}
+
+          {/* Top 3 Departments */}
+          {top3Departments.length > 0 && (
+            <Card className="p-6 shadow-xl">
+              <h2 className="text-xl font-semibold text-foreground mb-4">🌟 Suas principais áreas de atuação</h2>
+              <div className="space-y-4">
+                {top3Departments.map(([dept, score], index) => {
+                  const deptKey = Object.keys(DEPARTMENTS).find(key => DEPARTMENTS[key as keyof typeof DEPARTMENTS].name === dept)
+                  const description = deptKey ? DEPARTMENTS[deptKey as keyof typeof DEPARTMENTS].description : undefined
+                  
+                  return (
+                    <div
+                      key={dept}
+                      className="bg-accent border border-border rounded-lg p-6"
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-3">
+                          <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground font-bold text-sm">
+                            {index + 1}
+                          </span>
+                          <div>
+                            <h3 className="text-lg font-semibold text-foreground">{dept}</h3>
+                            {description && (
+                              <p className="text-sm text-muted-foreground">{description}</p>
+                            )}
+                          </div>
+                        </div>
+                        <span className="text-2xl font-bold text-primary">{score}</span>
+                      </div>
+                      <div className="mt-4">
+                        <Progress value={(score / top3Departments[0][1]) * 100} className="h-3" />
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </Card>
+          )}
+
+          {/* Other Departments */}
+          {otherDepartments.length > 0 && (
+            <Card className="p-6 shadow-xl">
+              <h2 className="text-xl font-semibold text-foreground mb-4">Outras áreas identificadas</h2>
+              <div className="grid gap-3">
+                {otherDepartments.map(([dept, score]) => {
+                  const deptKey = Object.keys(DEPARTMENTS).find(key => DEPARTMENTS[key as keyof typeof DEPARTMENTS].name === dept)
+                  const description = deptKey ? DEPARTMENTS[deptKey as keyof typeof DEPARTMENTS].description : undefined
+                  
+                  return (
+                    <div
+                      key={dept}
+                      className="bg-muted border border-border rounded-lg p-4 flex items-center justify-between"
+                    >
+                      <div className="flex-1">
+                        <span className="font-medium text-foreground">{dept}</span>
+                        {description && (
+                          <p className="text-sm text-muted-foreground mt-1">{description}</p>
+                        )}
+                      </div>
+                      <span className="text-lg font-semibold text-muted-foreground ml-4">{score}</span>
+                    </div>
+                  )
+                })}
+              </div>
+            </Card>
+          )}
+
+          {/* Top 3 Skills */}
+          {top3Skills.length > 0 && (
+            <Card className="p-6 shadow-xl">
+              <h2 className="text-xl font-semibold text-foreground mb-4">🌟 Suas principais habilidades</h2>
+              <div className="space-y-4">
+                {top3Skills.map(([skill, score], index) => {
+                  const skillKey = Object.keys(SKILLS).find(key => SKILLS[key as keyof typeof SKILLS].name === skill)
+                  const description = skillKey ? SKILLS[skillKey as keyof typeof SKILLS].description : undefined
+                  
+                  return (
+                    <div
+                      key={skill}
+                      className="bg-accent border border-border rounded-lg p-6"
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-3">
+                          <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground font-bold text-sm">
+                            {index + 1}
+                          </span>
+                          <div>
+                            <h3 className="text-lg font-semibold text-foreground">{skill}</h3>
+                            {description && (
+                              <p className="text-sm text-muted-foreground mt-1">{description}</p>
+                            )}
+                          </div>
+                        </div>
+                        <span className="text-2xl font-bold text-primary">{score}</span>
+                      </div>
+                      <div className="mt-4">
+                        <Progress value={(score / top3Skills[0][1]) * 100} className="h-3" />
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </Card>
+          )}
+
+          {/* Other Skills */}
+          {otherSkills.length > 0 && (
+            <Card className="p-6 shadow-xl">
+              <h2 className="text-xl font-semibold text-foreground mb-4">Outras habilidades identificadas</h2>
+              <div className="grid gap-3">
+                {otherSkills.map(([skill, score]) => {
+                  const skillKey = Object.keys(SKILLS).find(key => SKILLS[key as keyof typeof SKILLS].name === skill)
+                  const description = skillKey ? SKILLS[skillKey as keyof typeof SKILLS].description : undefined
+                  
+                  return (
+                    <div
+                      key={skill}
+                      className="bg-muted border border-border rounded-lg p-4 flex items-center justify-between"
+                    >
+                      <div className="flex-1">
+                        <span className="font-medium text-foreground">{skill}</span>
+                        {description && (
+                          <p className="text-sm text-muted-foreground mt-1">{description}</p>
+                        )}
+                      </div>
+                      <span className="text-lg font-semibold text-muted-foreground ml-4">{score}</span>
+                    </div>
+                  )
+                })}
+              </div>
+            </Card>
+          )}
+
+          {/* Actions */}
+          <Card className="p-6 shadow-xl">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button
+                onClick={handleResetTest}
+                variant="outline"
+                className="border-border cursor-pointer"
+              >
+                Refazer Teste
+              </Button>
+              <Button onClick={() => window.print()} className="bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer">
+                Imprimir Resultados
+              </Button>
             </div>
           </Card>
 
+          {/* Footer */}
           <div className="text-center">
-            <div className="flex items-center justify-center gap-2 text-sm text-slate-500">
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <Mail className="w-4 h-4" />
               <span>
                 Sugestões:{" "}
-                <a href="mailto:esseemail@email.com" className="text-sky-600 hover:underline">
+                <a href="mailto:esseemail@email.com" className="text-primary hover:underline">
                   esseemail@email.com
                 </a>
               </span>
@@ -642,11 +640,11 @@ export default function SpiritualGiftsTest() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50 py-8 px-4">
+    <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-3xl mx-auto space-y-6">
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1 space-y-2">
-            <div className="flex items-center justify-between text-sm text-slate-600">
+            <div className="flex items-center justify-between text-sm text-muted-foreground">
               <span>
                 Pergunta {currentQuestion + 1} de {questions.length}
               </span>
@@ -658,7 +656,7 @@ export default function SpiritualGiftsTest() {
             onClick={handleResetTest}
             variant="outline"
             size="sm"
-            className="border-slate-300 cursor-pointer whitespace-nowrap"
+            className="border-border cursor-pointer whitespace-nowrap"
           >
             <RotateCcw className="w-4 h-4 mr-2" />
             Refazer
@@ -668,10 +666,10 @@ export default function SpiritualGiftsTest() {
         <Card className="p-6 md:p-8 shadow-xl">
           <div className="space-y-6">
             <div>
-              <h2 className="text-xl md:text-2xl font-semibold text-slate-900 text-balance leading-relaxed">
+              <h2 className="text-xl md:text-2xl font-semibold text-foreground text-balance leading-relaxed">
                 {question.text}
               </h2>
-              <p className="text-sm text-slate-500 mt-2">{getQuestionTypeHelperText(question.type)}</p>
+              <p className="text-sm text-muted-foreground mt-2">{getQuestionTypeHelperText(question.type)}</p>
             </div>
 
             <div className="space-y-3">
@@ -679,8 +677,8 @@ export default function SpiritualGiftsTest() {
                 <label
                   key={index}
                   className={`flex items-start gap-3 p-4 rounded-lg border-2 cursor-pointer transition-all ${selectedOptions.includes(index)
-                    ? "border-sky-500 bg-sky-50"
-                    : "border-slate-200 hover:border-slate-300 bg-white"
+                    ? "border-primary bg-accent"
+                    : "border-border hover:border-muted-foreground bg-card"
                     }`}
                 >
                   <Checkbox
@@ -688,7 +686,7 @@ export default function SpiritualGiftsTest() {
                     onCheckedChange={() => handleOptionToggle(index)}
                     className="mt-0.5"
                   />
-                  <span className="text-slate-700 leading-relaxed">{option.text}</span>
+                  <span className="text-foreground leading-relaxed">{option.text}</span>
                 </label>
               ))}
             </div>
@@ -700,7 +698,7 @@ export default function SpiritualGiftsTest() {
             onClick={handleBack}
             disabled={currentQuestion === 0}
             variant="outline"
-            className="border-slate-300 bg-transparent cursor-pointer disabled:cursor-not-allowed"
+            className="border-border bg-transparent cursor-pointer disabled:cursor-not-allowed"
           >
             <ChevronLeft className="w-4 h-4 mr-2" />
             Voltar
@@ -708,14 +706,14 @@ export default function SpiritualGiftsTest() {
           <Button
             onClick={handleSkip}
             variant="outline"
-            className="border-slate-300 text-slate-700 hover:bg-slate-100 hover:text-slate-900 bg-transparent cursor-pointer"
+            className="border-border text-foreground hover:bg-muted hover:text-foreground bg-transparent cursor-pointer"
           >
             Pular
           </Button>
           <Button
             onClick={handleNext}
             disabled={selectedOptions.length === 0}
-            className="flex-1 bg-sky-600 hover:bg-sky-700 disabled:bg-slate-300 cursor-pointer disabled:cursor-not-allowed"
+            className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground disabled:bg-muted cursor-pointer disabled:cursor-not-allowed"
           >
             {currentQuestion === questions.length - 1 ? "Ver Resultados" : "Próxima"}
             <ChevronRight className="w-4 h-4 ml-2" />

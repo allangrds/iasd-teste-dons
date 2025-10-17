@@ -1,4 +1,4 @@
-# IASD | Teste de dons
+# Na Jornada | Teste de dons
 
 Fornecer uma aplicação simples para que membros e frequentadores possam responder um questionário que identifica talentos/interesses em ministérios da igreja, gerando uma pontuação por departamento
 
