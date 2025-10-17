@@ -280,7 +280,7 @@ export default function SpiritualGiftsTest() {
 
             <div className="space-y-4 text-left bg-sky-50 rounded-lg p-6 border border-sky-200">
               <div>
-                <h2 className="font-semibold text-slate-900 mb-2">Habilidades analisados neste teste:</h2>
+                <h2 className="font-semibold text-slate-900 mb-2">Habilidades analisadas neste teste:</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-700">
                   {Object.values(SKILLS)
                     .sort((a, b) => a.name.localeCompare(b.name))
@@ -354,15 +354,25 @@ export default function SpiritualGiftsTest() {
               </div>
             </div>
 
-            <Button
-              onClick={() => setStage("test")}
-              disabled={!userName}
-              size="lg"
-              className="w-full md:w-auto bg-sky-600 hover:bg-sky-700 text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              Iniciar Teste
-              <ChevronRight className="ml-2 w-4 h-4" />
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button
+                onClick={() => setStage("test")}
+                disabled={!userName}
+                size="lg"
+                className="w-full sm:w-auto bg-sky-600 hover:bg-sky-700 text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Iniciar Teste
+                <ChevronRight className="ml-2 w-4 h-4" />
+              </Button>
+              <Button
+                onClick={() => window.location.href = '/estatisticas'}
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto border-slate-300 cursor-pointer"
+              >
+                Ver Estatísticas
+              </Button>
+            </div>
 
             <div className="flex items-center justify-center gap-2 text-sm text-slate-500 pt-4">
               <Mail className="w-4 h-4" />

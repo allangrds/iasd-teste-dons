@@ -12,8 +12,8 @@ Fornecer uma aplicação simples para que membros e frequentadores possam respon
 
 ## Pré-requisitos
 
-- Node.js (recomendado: >= 18.16.0)compatíveis.
-- pnpm >= 10.x
+- Node.js (recomendado: >= 18.16.0)
+- npm >= 9.x
 
 
 ## Como instalar
@@ -28,7 +28,7 @@ cd iasd-teste-dons
 2. Instale dependências:
 
 ```bash
-pnpm install
+npm install
 ```
 
 ## Como executar o projeto localmente
@@ -36,54 +36,73 @@ pnpm install
 Para rodar em modo de desenvolvimento:
 
 ```bash
-pnpm dev
+npm run dev
 # depois abra http://localhost:3000
 ```
 
 Para gerar uma build de produção e servir:
 
 ```bash
-pnpm build
-pnpm start
+npm run build
+npm start
 ```
+
+## Rotas da aplicação
+
+A aplicação possui duas rotas principais:
+
+- `/` - Página inicial com o questionário de identificação de talentos/dons. Os usuários respondem às perguntas e ao final recebem uma pontuação por departamento.
+- `/estatisticas` - Página de estatísticas que exibe um resumo dos resultados e análises dos dados coletados.
 
 ## Como funciona o JSON das perguntas
 
-As perguntas são definidas como um array de objetos. Cada pergunta possui um `id`, um `text` (enunciado) e um array `options` com as alternativas. Cada alternativa tem um `text` e um objeto `points` que mapeia departamentos para pontuações.
+As perguntas são definidas como um array de objetos no arquivo `lib/quiz-data.ts`. A estrutura atual é mais complexa e completa, incluindo:
 
-Exemplo mínimo (um item):
+- **DEPARTMENTS**: Objeto que define todos os departamentos/ministérios disponíveis, cada um com `name` e `description`.
+- **SKILLS**: Objeto que define as habilidades avaliadas, cada uma com `name` e `description`.
+- **QUESTION_TYPE**: Enum que define os tipos de pergunta disponíveis:
+  - `SINGLE_CHOICE`: escolha única
+  - `MULTIPLE_CHOICE`: múltipla escolha
+  - `RANKING`: ordenação por preferência
+  - `YES_NO`: sim ou não
+- **QUESTIONS**: Array com as perguntas do questionário.
 
-```json
-[
-	{
-		"id": 1,
-		"text": "Você gosta de planejar eventos espirituais ou de estudo?",
-		"options": [
-			{
-				"text": "Sim, organizo agendas e materiais",
-				"points": {
-					"Secretaria": 2
-				}
-			},
-			{
-				"text": "Prefiro conduzir estudos ou liderar discussões",
-				"points": {
-					"Ministério Pessoal": 2
-				}
-			}
-		]
-	}
-]
+Exemplo de uma pergunta:
+
+```typescript
+{
+  id: 1,
+  text: "Quando eu preciso resolver problemas em grupo, como costuma agir?",
+  type: QUESTION_TYPE.MULTIPLE_CHOICE,
+  options: [
+    {
+      text: "Assumo a liderança e organizo as tarefas",
+      points: {
+        [SKILLS.lideranca.name]: 1,
+        [SKILLS.iniciativa.name]: 1,
+        [SKILLS.organizacao.name]: 1
+      }
+    },
+    {
+      text: "Contribuo com ideias",
+      points: {
+        [SKILLS.criatividade.name]: 1
+      }
+    }
+  ]
+}
 ```
 
-Campos:
-- id: número único da pergunta.
-- text: enunciado da pergunta.
-- options: array de alternativas.
-	- text: texto da alternativa.
-	- points: mapa onde a chave é o nome do departamento/ministério e o valor é a pontuação atribuída quando a alternativa é escolhida.
+Campos principais:
 
-No projeto existente, o arquivo com as perguntas está em `lib/quiz-data.ts` e segue esse esquema (tipado como `Question`).
+- `id`: número único da pergunta
+- `text`: enunciado da pergunta
+- `type`: tipo da pergunta (do enum QUESTION_TYPE)
+- `options`: array de alternativas
+  - `text`: texto da alternativa
+  - `points`: objeto onde a chave é uma referência para `DEPARTMENTS[key].name` ou `SKILLS[key].name` e o valor é a pontuação atribuída
+
+As pontuações são acumuladas por habilidade ou departamento, e as habilidades estão relacionadas aos departamentos através da lógica da aplicação.
 
 ## Como contribuir
 
@@ -97,8 +116,7 @@ git checkout -b feature/minha-melhora
 3. Faça commits pequenos e claros. Ao terminar, envie um pull request para a branch `main` deste repositório.
 
 Dicas:
-- Mantenha o formato do JSON de perguntas ao adicionar novas entradas.
-- Rode `pnpm dev` localmente e verifique visualmente qualquer alteração de UI.
-- Se adicionar dependências, atualize o `pnpm-lock.yaml` (ou forneça instruções alternativas).
 
----
+- Mantenha o formato do JSON de perguntas ao adicionar novas entradas.
+- Rode `npm run dev` localmente e verifique visualmente qualquer alteração de UI.
+- Se adicionar dependências, atualize o `package-lock.json`.
