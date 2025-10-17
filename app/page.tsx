@@ -417,7 +417,7 @@ export default function SpiritualGiftsTest() {
             <Card className="p-6 shadow-xl">
               <h2 className="font-semibold text-foreground text-lg mb-4 flex items-center gap-2">
                 <User className="w-5 h-5" />
-                Informações do Participante
+                Informações do participante
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {userName && (
