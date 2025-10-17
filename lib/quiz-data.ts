@@ -190,7 +190,8 @@ export const SKILLS = {
   },
   ellen_white: {
     name: "Conhecimento dos escritos de Ellen G. White",
-    description: "Familiaridade com os escritos e ensinamentos de Ellen G. White.",
+    description:
+      "Familiaridade com os escritos e ensinamentos de Ellen G. White.",
   },
   fotografia_e_video: {
     name: "Fotografia e vídeo",
@@ -277,7 +278,7 @@ export const SKILLS = {
     name: "Computador",
     description: "Habilidade de usar computadores e software.",
   },
-  segurança: {
+  seguranca: {
     name: "Segurança",
     description:
       "Habilidade de garantir a segurança e o bem-estar da comunidade.",
@@ -304,48 +305,48 @@ export type QUESTION = {
 export const QUESTIONS: QUESTION[] = [
   {
     id: 1,
-    text: "Quando você precisa resolver problemas em grupo, como costuma agir?",
+    text: "Quando eu preciso resolver problemas em grupo, como costuma agir?",
     type: QUESTION_TYPE.MULTIPLE_CHOICE,
     options: [
       {
         text: "Assumo a liderança e organizo as tarefas",
         points: {
-          [SKILLS.lideranca.name]: 2,
+          [SKILLS.lideranca.name]: 1,
           [SKILLS.iniciativa.name]: 1,
           [SKILLS.organizacao.name]: 1,
         },
       },
       {
-        text: "Contribuo com ideias criativas",
+        text: "Contribuo com ideias",
         points: {
-          [SKILLS.criatividade.name]: 2,
+          [SKILLS.criatividade.name]: 1,
         },
       },
       {
         text: "Ajudo a integrar todos e mediar conflitos",
         points: {
-          [SKILLS.integracao.name]: 2,
-          [SKILLS.mediacao_conflitos.name]: 2,
+          [SKILLS.integracao.name]: 1,
+          [SKILLS.mediacao_conflitos.name]: 1,
         },
       },
       {
         text: "Prefiro seguir instruções e colaborar",
         points: {
-          [SKILLS.trabalho_em_equipe.name]: 2,
+          [SKILLS.trabalho_em_equipe.name]: 1,
         },
       },
     ],
   },
   {
-    id: 3,
-    text: "Você gosta de trabalhar com tecnologia, redes sociais ou design gráfico?",
+    id: 2,
+    text: "Eu gosto de trabalhar com tecnologia, redes sociais ou design gráfico?",
     type: QUESTION_TYPE.YES_NO,
     options: [
       {
         text: "Sim",
         points: {
-          [SKILLS.computador.name]: 2,
-          [SKILLS.redes_sociais.name]: 2,
+          [SKILLS.computador.name]: 1,
+          [SKILLS.redes_sociais.name]: 1,
           [SKILLS.edicao_imagem_video.name]: 1,
         },
       },
@@ -356,42 +357,35 @@ export const QUESTIONS: QUESTION[] = [
     ],
   },
   {
-    id: 4,
-    text: "Quando você tem tempo livre, você gosta de:",
+    id: 3,
+    text: "Quando eu tenho tempo livre, eu gosto de:",
     type: QUESTION_TYPE.MULTIPLE_CHOICE,
     options: [
       {
         text: "Cantar ou tocar instrumentos",
         points: {
-          [SKILLS.canto.name]: 2,
-          [SKILLS.instrumentos_musicais.name]: 2,
+          [SKILLS.canto.name]: 1,
+          [SKILLS.instrumentos_musicais.name]: 1,
         },
       },
       {
         text: "Estudar",
         points: {
-          [SKILLS.ensino.name]: 2,
+          [SKILLS.ensino.name]: 1,
           [SKILLS.mentoria.name]: 1,
         },
       },
       {
         text: "Atividades físicas ou ao ar livre",
         points: {
-          [SKILLS.energia.name]: 2,
-        },
-      },
-      {
-        text: "Ajudar pessoas em necessidades",
-        points: {
-          [SKILLS.servico.name]: 2,
-          [SKILLS.empatia.name]: 1,
+          [SKILLS.energia.name]: 1,
         },
       },
     ],
   },
   {
-    id: 5,
-    text: "Sou organizado(a) e consigo cumprir prazos facilmente.",
+    id: 4,
+    text: "Sou organizado e consigo cumprir prazos facilmente.",
     type: QUESTION_TYPE.RANKING,
     options: [
       { text: "1", points: {} },
@@ -402,8 +396,8 @@ export const QUESTIONS: QUESTION[] = [
     ],
   },
   {
-    id: 6,
-    text: "Você é uma pessoa organizada financeiramente?",
+    id: 5,
+    text: "Sou organizado financeiramente?",
     type: QUESTION_TYPE.RANKING,
     options: [
       { text: "1", points: {} },
@@ -434,128 +428,295 @@ export const QUESTIONS: QUESTION[] = [
       },
     ],
   },
-  // {
-  //   id: 6,
-  //   text: "Você gosta de participar de atividades de serviço social ou humanitário?",
-  //   type: QUESTION_TYPE.RANKING,
-  //   options: [
-  //     { text: "1", points: {} },
-  //     { text: "2", points: {} },
-  //     {
-  //       text: "3",
-  //       points: {
-  //         [SKILLS.servico.name]: 1,
-  //         [SKILLS.empatia.name]: 1,
-  //         [DEPARTMENTS.acao_solidaria_adventista.name]: 1,
-  //       },
-  //     },
-  //     {
-  //       text: "4",
-  //       points: {
-  //         [SKILLS.servico.name]: 2,
-  //         [SKILLS.empatia.name]: 1,
-  //         [DEPARTMENTS.acao_solidaria_adventista.name]: 2,
-  //       },
-  //     },
-  //     {
-  //       text: "5",
-  //       points: {
-  //         [SKILLS.servico.name]: 3,
-  //         [SKILLS.empatia.name]: 1,
-  //         [DEPARTMENTS.acao_solidaria_adventista.name]: 3,
-  //       },
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 7,
-  //   text: "Você gosta de trabalhar com qual tipo de público na igreja?",
-  //   type: QUESTION_TYPE.MULTIPLE_CHOICE,
-  //   options: [
-  //     {
-  //       text: "Crianças (0 a 14 anos)",
-  //       points: {
-  //         [DEPARTMENTS.ministerio_crianca.name]: 2,
-  //         [SKILLS.criancas.name]: 2,
-  //         [DEPARTMENTS.clube_aventureiros.name]: 2,
-  //       },
-  //     },
-  //     {
-  //       text: "Adolescentes(10 a 15 anos)",
-  //       points: {
-  //         [DEPARTMENTS.clube_desbravadores.name]: 2,
-  //         [DEPARTMENTS.ministerio_adolescente.name]: 2,
-  //         [SKILLS.adolescentes.name]: 2,
-  //       },
-  //     },
-  //     {
-  //       text: "Jovens",
-  //       points: {
-  //         [DEPARTMENTS.ministerio_jovem.name]: 2,
-  //         [SKILLS.jovens.name]: 2,
-  //       },
-  //     },
-  //     {
-  //       text: "Homens",
-  //       points: {
-  //         [DEPARTMENTS.ministerio_homens.name]: 2,
-  //         [SKILLS.homens.name]: 2,
-  //       },
-  //     },
-  //     {
-  //       text: "Mulheres",
-  //       points: {
-  //         [DEPARTMENTS.ministerio_mulher.name]: 2,
-  //         [SKILLS.mulheres.name]: 2,
-  //       },
-  //     },
-  //     {
-  //       text: "Idosos",
-  //       points: {
-  //         [DEPARTMENTS.ministerio_idoso.name]: 2,
-  //         [SKILLS.idoso.name]: 2,
-  //       },
-  //     },
-  //     {
-  //       text: "Pessoas com deficiência",
-  //       points: {
-  //         [DEPARTMENTS.ministerio_possibilidades.name]: 2,
-  //         [SKILLS.possibilidades.name]: 2,
-  //       },
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 8,
-  //   text: "Você gosta de trabalhar com música e/ou adoração?",
-  //   type: QUESTION_TYPE.MULTIPLE_CHOICE,
-  //   options: [
-  //     {
-  //       text: "Sim, eu canto",
-  //       points: {
-  //         [DEPARTMENTS.ministerio_musica.name]: 2,
-  //         [SKILLS.canto.name]: 2,
-  //       },
-  //     },
-  //     {
-  //       text: "Sim, eu toco instrumentos",
-  //       points: {
-  //         [DEPARTMENTS.ministerio_musica.name]: 2,
-  //         [SKILLS.instrumentos_musicais.name]: 2,
-  //       },
-  //     },
-  //     {
-  //       text: "Sim, eu canto e toco instrumentos",
-  //       points: {
-  //         [DEPARTMENTS.ministerio_musica.name]: 2,
-  //         [SKILLS.instrumentos_musicais.name]: 2,
-  //         [SKILLS.canto.name]: 2,
-  //       },
-  //     },
-  //     {
-  //       text: "Não",
-  //       points: {},
-  //     },
-  //   ],
-  // },
+  {
+    id: 6,
+    text: "Como você reage diante de um imprevisto?",
+    type: QUESTION_TYPE.SINGLE_CHOICE,
+    options: [
+      {
+        text: "Tomo a frente e procuro resolver rápido",
+        points: {
+          [SKILLS.lideranca.name]: 2,
+          [SKILLS.iniciativa.name]: 1,
+        },
+      },
+      {
+        text: "Penso nas opções antes de agir",
+        points: {
+          [SKILLS.organizacao.name]: 1,
+        },
+      },
+      {
+        text: "Procuro manter o grupo calmo e otimista",
+        points: {
+          [SKILLS.alto_astral.name]: 2,
+          [SKILLS.empatia.name]: 1,
+        },
+      },
+      {
+        text: "Busco ajuda de quem entende mais do assunto",
+        points: {
+          [SKILLS.trabalho_em_equipe.name]: 2,
+        },
+      },
+    ],
+  },
+  {
+    id: 7,
+    text: "Qual dessas opções mais combina com o seu jeito de pensar?",
+    type: QUESTION_TYPE.SINGLE_CHOICE,
+    options: [
+      {
+        text: "Gosto de analisar, planejar e pensar antes de agir",
+        points: {
+          [SKILLS.organizacao.name]: 1,
+        },
+      },
+      {
+        text: "Sou criativo(a) e gosto de pensar fora da caixa",
+        points: {
+          [SKILLS.criatividade.name]: 1,
+        },
+      },
+      {
+        text: "Sou prático(a) e gosto de ver as coisas funcionando",
+        points: {
+          [DEPARTMENTS.patrimonio_manutencao.name]: 1,
+          [SKILLS.iniciativa.name]: 1,
+        },
+      },
+      {
+        text: "Sou bom(a) em ouvir e entender os outros",
+        points: {
+          [SKILLS.empatia.name]: 1,
+        },
+      },
+    ],
+  },
+  {
+    id: 8,
+    text: "Eu me sinto mais confortável em situações que exigem…",
+    type: QUESTION_TYPE.SINGLE_CHOICE,
+    options: [
+      {
+        text: "Trabalhar com pessoas",
+        points: {
+          [SKILLS.trabalho_em_equipe.name]: 1,
+          [SKILLS.comunicacao.name]: 1,
+        },
+      },
+      {
+        text: "Cuidar de detalhes e organização",
+        points: {
+          [SKILLS.organizacao.name]: 1,
+        },
+      },
+      {
+        text: "Usar a criatividade",
+        points: {
+          [SKILLS.criatividade.name]: 1,
+        },
+      },
+      {
+        text: "Lidar com equipamentos e tecnologia",
+        points: {
+          [DEPARTMENTS.ministerio_som_transmissao.name]: 1,
+          [SKILLS.computador.name]: 1,
+        },
+      },
+    ],
+  },
+  {
+    id: 9,
+    text: "Eu me sinto realizado na igreja quando...",
+    type: QUESTION_TYPE.MULTIPLE_CHOICE,
+    options: [
+      {
+        text: "Quando cuido de pessoas",
+        points: {
+          [SKILLS.servico.name]: 1,
+          [SKILLS.empatia.name]: 1,
+          [DEPARTMENTS.acao_solidaria_adventista.name]: 1,
+          [DEPARTMENTS.ministerio_possibilidades.name]: 1,
+        },
+      },
+      {
+        text: "Ensino outras pessoas",
+        points: {
+          [SKILLS.ensino.name]: 1,
+          [DEPARTMENTS.ministerio_pessoal.name]: 1,
+          [DEPARTMENTS.escola_sabatina.name]: 1,
+        },
+      },
+      {
+        text: "Trabalho com crianças ou jovens",
+        points: {
+          [SKILLS.criancas.name]: 1,
+          [SKILLS.adolescentes.name]: 1,
+          [SKILLS.jovens.name]: 1,
+          [DEPARTMENTS.ministerio_crianca.name]: 1,
+          [DEPARTMENTS.clube_aventureiros.name]: 1,
+          [DEPARTMENTS.clube_desbravadores.name]: 1,
+          [DEPARTMENTS.ministerio_jovem.name]: 1,
+        },
+      },
+      {
+        text: "Participo da música e adoração",
+        points: {
+          [SKILLS.canto.name]: 1,
+          [SKILLS.instrumentos_musicais.name]: 1,
+          [DEPARTMENTS.ministerio_musica.name]: 1,
+        },
+      },
+      {
+        text: "Ajudo na organização e administração",
+        points: {
+          [SKILLS.organizacao.name]: 1,
+          [SKILLS.trabalho_em_equipe.name]: 1,
+          [DEPARTMENTS.secretaria.name]: 1,
+          [DEPARTMENTS.patrimonio_manutencao.name]: 1,
+        },
+      },
+      {
+        text: "Quando posso pregar ou compartilhar a fé",
+        points: {
+          [SKILLS.evangelismo.name]: 1,
+          [SKILLS.comunicacao.name]: 1,
+          [DEPARTMENTS.ministerio_pessoal.name]: 1,
+        },
+      },
+      {
+        text: "Cuido do prédio e da segurança da igreja",
+        points: {
+          [SKILLS.seguranca.name]: 1,
+          [DEPARTMENTS.patrimonio_manutencao.name]: 1,
+          [DEPARTMENTS.diaconos.name]: 1,
+        },
+      },
+    ],
+  },
+  {
+    id: 10,
+    text: "Eu gosto de participar de atividades de serviço social ou humanitário",
+    type: QUESTION_TYPE.RANKING,
+    options: [
+      { text: "1", points: {} },
+      { text: "2", points: {} },
+      {
+        text: "3",
+        points: {
+          [SKILLS.servico.name]: 1,
+          [SKILLS.empatia.name]: 1,
+          [DEPARTMENTS.acao_solidaria_adventista.name]: 1,
+        },
+      },
+      {
+        text: "4",
+        points: {
+          [SKILLS.servico.name]: 2,
+          [SKILLS.empatia.name]: 2,
+          [DEPARTMENTS.acao_solidaria_adventista.name]: 2,
+        },
+      },
+      {
+        text: "5",
+        points: {
+          [SKILLS.servico.name]: 3,
+          [SKILLS.empatia.name]: 3,
+          [DEPARTMENTS.acao_solidaria_adventista.name]: 3,
+        },
+      },
+    ],
+  },
+  {
+    id: 11,
+    text: "Eu gosto de trabalhar com o seguinte tipo de público na igreja:",
+    type: QUESTION_TYPE.MULTIPLE_CHOICE,
+    options: [
+      {
+        text: "Crianças (0 a 14 anos)",
+        points: {
+          [DEPARTMENTS.ministerio_crianca.name]: 1,
+          [SKILLS.criancas.name]: 1,
+          [DEPARTMENTS.clube_aventureiros.name]: 1,
+        },
+      },
+      {
+        text: "Adolescentes(10 a 15 anos)",
+        points: {
+          [DEPARTMENTS.clube_desbravadores.name]: 1,
+          [DEPARTMENTS.ministerio_adolescente.name]: 1,
+          [SKILLS.adolescentes.name]: 1,
+        },
+      },
+      {
+        text: "Jovens",
+        points: {
+          [DEPARTMENTS.ministerio_jovem.name]: 1,
+          [SKILLS.jovens.name]: 1,
+        },
+      },
+      {
+        text: "Homens",
+        points: {
+          [DEPARTMENTS.ministerio_homens.name]: 1,
+          [SKILLS.homens.name]: 1,
+        },
+      },
+      {
+        text: "Mulheres",
+        points: {
+          [DEPARTMENTS.ministerio_mulher.name]: 1,
+          [SKILLS.mulheres.name]: 1,
+        },
+      },
+      {
+        text: "Idosos",
+        points: {
+          [DEPARTMENTS.ministerio_idoso.name]: 1,
+          [SKILLS.idoso.name]: 1,
+        },
+      },
+      {
+        text: "Pessoas com deficiência",
+        points: {
+          [DEPARTMENTS.ministerio_possibilidades.name]: 1,
+          [SKILLS.possibilidades.name]: 1,
+        },
+      },
+    ],
+  },
+  {
+    id: 11,
+    text: "Eu gosto de trabalhar com música e/ou adoração",
+    type: QUESTION_TYPE.SINGLE_CHOICE,
+    options: [
+      {
+        text: "Sim, eu canto",
+        points: {
+          [DEPARTMENTS.ministerio_musica.name]: 1,
+          [SKILLS.canto.name]: 1,
+        },
+      },
+      {
+        text: "Sim, eu toco instrumentos",
+        points: {
+          [DEPARTMENTS.ministerio_musica.name]: 1,
+          [SKILLS.instrumentos_musicais.name]: 1,
+        },
+      },
+      {
+        text: "Sim, eu canto e toco instrumentos",
+        points: {
+          [DEPARTMENTS.ministerio_musica.name]: 2,
+          [SKILLS.instrumentos_musicais.name]: 2,
+          [SKILLS.canto.name]: 2,
+        },
+      },
+      {
+        text: "Não",
+        points: {},
+      },
+    ],
+  },
 ];

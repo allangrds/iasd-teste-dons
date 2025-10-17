@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Progress } from "@/components/ui/progress"
-import { ChevronLeft, ChevronRight, Mail, Sparkles, RotateCcw } from "lucide-react"
+import { ChevronLeft, ChevronRight, Mail, Sparkles, RotateCcw, User, Phone } from "lucide-react"
 import { DEPARTMENTS, SKILLS, QUESTIONS, QUESTION_TYPE } from "@/lib/quiz-data"
 
 const questions = QUESTIONS
@@ -197,6 +197,13 @@ export default function SpiritualGiftsTest() {
 
       optionIndices.forEach((optionIndex) => {
         const option = question.options[optionIndex]
+
+        const hasPoints = Object.keys(option?.points || {}).length > 0
+
+        if (!hasPoints) {
+          return
+        }
+
         Object.entries(option.points).forEach(([name, points]) => {
           if (departmentNames.includes(name)) {
             departmentScores[name] = (departmentScores[name] || 0) + points
@@ -390,6 +397,55 @@ export default function SpiritualGiftsTest() {
               <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-0">Seus Resultados</h1>
               <p className="text-lg text-slate-600">Descubra onde seus dons podem fazer a diferença</p>
             </div>
+
+            {/* User Information Section */}
+            {(userName || userEmail || userPhone) && (
+              <div className="mb-8 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl border-2 border-slate-200 overflow-hidden">
+                <div className="bg-gradient-to-r from-sky-600 to-emerald-600 px-6 py-3">
+                  <h2 className="font-semibold text-white text-lg flex items-center gap-2">
+                    <User className="w-5 h-5" />
+                    Informações do Participante
+                  </h2>
+                </div>
+                <div className="p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {userName && (
+                      <div className="flex items-center gap-3 p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center">
+                          <User className="w-5 h-5 text-sky-600" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">Nome</p>
+                          <p className="text-sm font-semibold text-slate-900 truncate">{userName}</p>
+                        </div>
+                      </div>
+                    )}
+                    {userEmail && (
+                      <div className="flex items-center gap-3 p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
+                          <Mail className="w-5 h-5 text-emerald-600" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">E-mail</p>
+                          <p className="text-sm font-semibold text-slate-900 truncate">{userEmail}</p>
+                        </div>
+                      </div>
+                    )}
+                    {userPhone && (
+                      <div className="flex items-center gap-3 p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                          <Phone className="w-5 h-5 text-purple-600" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">Telefone</p>
+                          <p className="text-sm font-semibold text-slate-900 truncate">{userPhone}</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="space-y-6">
               {
