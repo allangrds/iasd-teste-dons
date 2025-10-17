@@ -262,14 +262,10 @@ export default function SpiritualGiftsTest() {
                 </li>
                 <li className="flex gap-2">
                   <span className="text-sky-600 font-semibold">2.</span>
-                  Você pode selecionar múltiplas opções por pergunta
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-sky-600 font-semibold">3.</span>
                   Você pode pular perguntas se preferir
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-sky-600 font-semibold">4.</span>
+                  <span className="text-sky-600 font-semibold">3.</span>
                   Ao final, descubra suas principais áreas de atuação
                 </li>
               </ul>
@@ -401,23 +397,35 @@ export default function SpiritualGiftsTest() {
                   <div>
                     <h2 className="text-xl font-semibold text-slate-900 mb-4">🌟 Suas principais áreas de atuação</h2>
                     <div className="space-y-4">
-                      {top3Departments.map(([dept, score], index) => (
-                        <div
-                          key={dept}
-                          className="bg-gradient-to-r from-sky-50 to-emerald-50 border-2 border-sky-200 rounded-lg p-6"
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center gap-3">
-                              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-600 text-white font-bold text-sm">
-                                {index + 1}
-                              </span>
-                              <h3 className="text-lg font-semibold text-slate-900">{dept}</h3>
+                      {top3Departments.map(([dept, score], index) => {
+                        const deptKey = Object.keys(DEPARTMENTS).find(key => DEPARTMENTS[key as keyof typeof DEPARTMENTS].name === dept)
+                        const description = deptKey ? DEPARTMENTS[deptKey as keyof typeof DEPARTMENTS].description : undefined
+                        
+                        return (
+                          <div
+                            key={dept}
+                            className="bg-gradient-to-r from-sky-50 to-emerald-50 border-2 border-sky-200 rounded-lg p-6"
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="flex items-center gap-3">
+                                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-600 text-white font-bold text-sm">
+                                  {index + 1}
+                                </span>
+                                <div>
+                                  <h3 className="text-lg font-semibold text-slate-900">{dept}</h3>
+                                  {description && (
+                                    <p className="text-sm text-slate-600">{description}</p>
+                                  )}
+                                </div>
+                              </div>
+                              <span className="text-2xl font-bold text-sky-600">{score}</span>
                             </div>
-                            <span className="text-2xl font-bold text-sky-600">{score}</span>
+                            <div className="mt-4">
+                              <Progress value={(score / top3Departments[0][1]) * 100} className="h-3" />
+                            </div>
                           </div>
-                          <Progress value={(score / top3Departments[0][1]) * 100} className="h-3" />
-                        </div>
-                      ))}
+                        )
+                      })}
                     </div>
                   </div>
                 )
@@ -427,15 +435,25 @@ export default function SpiritualGiftsTest() {
                 <div>
                   <h2 className="text-xl font-semibold text-slate-900 mb-4">Outras áreas identificadas</h2>
                   <div className="grid gap-3">
-                    {otherDepartments.map(([dept, score]) => (
-                      <div
-                        key={dept}
-                        className="bg-slate-50 border border-slate-200 rounded-lg p-4 flex items-center justify-between"
-                      >
-                        <span className="font-medium text-slate-700">{dept}</span>
-                        <span className="text-lg font-semibold text-slate-600">{score}</span>
-                      </div>
-                    ))}
+                    {otherDepartments.map(([dept, score]) => {
+                      const deptKey = Object.keys(DEPARTMENTS).find(key => DEPARTMENTS[key as keyof typeof DEPARTMENTS].name === dept)
+                      const description = deptKey ? DEPARTMENTS[deptKey as keyof typeof DEPARTMENTS].description : undefined
+                      
+                      return (
+                        <div
+                          key={dept}
+                          className="bg-slate-50 border border-slate-200 rounded-lg p-4 flex items-center justify-between"
+                        >
+                          <div className="flex-1">
+                            <span className="font-medium text-slate-700">{dept}</span>
+                            {description && (
+                              <p className="text-sm text-slate-600 mt-1">{description}</p>
+                            )}
+                          </div>
+                          <span className="text-lg font-semibold text-slate-600 ml-4">{score}</span>
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
               )}
@@ -444,23 +462,35 @@ export default function SpiritualGiftsTest() {
                 <div>
                   <h2 className="text-xl font-semibold text-slate-900 mb-4">🌟 Suas principais habilidades</h2>
                   <div className="space-y-4">
-                    {top3Skills.map(([skill, score], index) => (
-                      <div
-                        key={skill}
-                        className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-lg p-6"
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-3">
-                            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-600 text-white font-bold text-sm">
-                              {index + 1}
-                            </span>
-                            <h3 className="text-lg font-semibold text-slate-900">{skill}</h3>
+                    {top3Skills.map(([skill, score], index) => {
+                      const skillKey = Object.keys(SKILLS).find(key => SKILLS[key as keyof typeof SKILLS].name === skill)
+                      const description = skillKey ? SKILLS[skillKey as keyof typeof SKILLS].description : undefined
+                      
+                      return (
+                        <div
+                          key={skill}
+                          className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-lg p-6"
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-3">
+                              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-600 text-white font-bold text-sm">
+                                {index + 1}
+                              </span>
+                              <div>
+                                <h3 className="text-lg font-semibold text-slate-900">{skill}</h3>
+                                {description && (
+                                  <p className="text-sm text-slate-600 mt-1">{description}</p>
+                                )}
+                              </div>
+                            </div>
+                            <span className="text-2xl font-bold text-purple-600">{score}</span>
                           </div>
-                          <span className="text-2xl font-bold text-purple-600">{score}</span>
+                          <div className="mt-4">
+                            <Progress value={(score / top3Skills[0][1]) * 100} className="h-3" />
+                          </div>
                         </div>
-                        <Progress value={(score / top3Skills[0][1]) * 100} className="h-3" />
-                      </div>
-                    ))}
+                      )
+                    })}
                   </div>
                 </div>
               )}
@@ -469,15 +499,25 @@ export default function SpiritualGiftsTest() {
                 <div>
                   <h2 className="text-xl font-semibold text-slate-900 mb-4">Outras habilidades identificadas</h2>
                   <div className="grid gap-3">
-                    {otherSkills.map(([dept, score]) => (
-                      <div
-                        key={dept}
-                        className="bg-slate-50 border border-slate-200 rounded-lg p-4 flex items-center justify-between"
-                      >
-                        <span className="font-medium text-slate-700">{dept}</span>
-                        <span className="text-lg font-semibold text-slate-600">{score}</span>
-                      </div>
-                    ))}
+                    {otherSkills.map(([skill, score]) => {
+                      const skillKey = Object.keys(SKILLS).find(key => SKILLS[key as keyof typeof SKILLS].name === skill)
+                      const description = skillKey ? SKILLS[skillKey as keyof typeof SKILLS].description : undefined
+                      
+                      return (
+                        <div
+                          key={skill}
+                          className="bg-slate-50 border border-slate-200 rounded-lg p-4 flex items-center justify-between"
+                        >
+                          <div className="flex-1">
+                            <span className="font-medium text-slate-700">{skill}</span>
+                            {description && (
+                              <p className="text-sm text-slate-600 mt-1">{description}</p>
+                            )}
+                          </div>
+                          <span className="text-lg font-semibold text-slate-600 ml-4">{score}</span>
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
               )}

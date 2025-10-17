@@ -190,6 +190,7 @@ export const SKILLS = {
   },
   ellen_white: {
     name: "Conhecimento dos escritos de Ellen G. White",
+    description: "Familiaridade com os escritos e ensinamentos de Ellen G. White.",
   },
   fotografia_e_video: {
     name: "Fotografia e vídeo",
