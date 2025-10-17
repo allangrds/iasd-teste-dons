@@ -55,10 +55,10 @@ export default function StatisticsPage() {
     QUESTIONS.forEach((question) => {
       const departmentsInQuestion = new Set<string>()
       const skillsInQuestion = new Set<string>()
-      
+
       // For single-choice questions (single_choice, yes_no, ranking), 
       // we need to find the maximum points among options, not sum them
-      const isSingleChoice = 
+      const isSingleChoice =
         question.type === QUESTION_TYPE.SINGLE_CHOICE ||
         question.type === QUESTION_TYPE.YES_NO ||
         question.type === QUESTION_TYPE.RANKING
@@ -177,7 +177,7 @@ export default function StatisticsPage() {
   const [expandedQuestions, setExpandedQuestions] = useState<Set<number>>(
     new Set(QUESTIONS.map(q => q.id)) // All questions expanded by default
   )
-  
+
   // Section-level collapse state
   const [showDepartmentsSection, setShowDepartmentsSection] = useState(true)
   const [showSkillsSection, setShowSkillsSection] = useState(true)
@@ -296,91 +296,91 @@ export default function StatisticsPage() {
             </div>
             {showDepartmentsSection && (
               <div className="grid gap-4">
-              {departments.map((dept) => {
-                const isExpanded = expandedDepts.has(dept.name)
-                return (
-                  <div
-                    key={dept.name}
-                    className="bg-accent border border-border rounded-lg overflow-hidden"
-                  >
-                    <div className="p-5 hover:bg-muted transition-colors">
-                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
-                        <div className="flex-1 space-y-2">
-                          <h3 className="text-lg font-semibold text-foreground">{dept.name}</h3>
-                          {dept.description && (
-                            <p className="text-sm text-muted-foreground">{dept.description}</p>
-                          )}
-                        </div>
-                        <div className="flex gap-6 md:gap-8 flex-shrink-0">
-                          <div className="text-center">
-                            <div className="text-2xl font-bold text-primary">{dept.questionCount}</div>
-                            <div className="text-xs text-muted-foreground font-medium">
-                              {dept.questionCount === 1 ? "pergunta" : "perguntas"}
-                            </div>
+                {departments.map((dept) => {
+                  const isExpanded = expandedDepts.has(dept.name)
+                  return (
+                    <div
+                      key={dept.name}
+                      className="bg-accent border border-border rounded-lg overflow-hidden"
+                    >
+                      <div className="p-5 hover:bg-muted transition-colors">
+                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+                          <div className="flex-1 space-y-2">
+                            <h3 className="text-lg font-semibold text-foreground">{dept.name}</h3>
+                            {dept.description && (
+                              <p className="text-sm text-muted-foreground">{dept.description}</p>
+                            )}
                           </div>
-                          <div className="text-center">
-                            <div className="text-2xl font-bold text-primary">{dept.maxPoints}</div>
-                            <div className="text-xs text-muted-foreground font-medium">
-                              {dept.maxPoints === 1 ? "ponto" : "pontos"}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {dept.questions.length > 0 && (
-                        <button
-                          onClick={() => toggleDepartment(dept.name)}
-                          className="mt-4 flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-                        >
-                          {isExpanded ? (
-                            <>
-                              <ChevronUp className="w-4 h-4" />
-                              Ocultar perguntas
-                            </>
-                          ) : (
-                            <>
-                              <ChevronDown className="w-4 h-4" />
-                              Ver {dept.questions.length} {dept.questions.length === 1 ? "pergunta" : "perguntas"}
-                            </>
-                          )}
-                        </button>
-                      )}
-                    </div>
-
-                    {isExpanded && dept.questions.length > 0 && (
-                      <div className="border-t border-border bg-card p-5 space-y-4">
-                        {dept.questions.map((q) => (
-                          <div key={`${dept.name}-${q.id}`} className="space-y-2">
-                            <div className="flex items-start gap-2">
-                              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex-shrink-0">
-                                {q.id}
-                              </span>
-                              <div className="flex-1">
-                                <p className="text-sm font-medium text-foreground">{q.text}</p>
-                                <p className="text-xs text-muted-foreground mt-1">{getQuestionTypeLabel(q.type)}</p>
+                          <div className="flex gap-6 md:gap-8 flex-shrink-0">
+                            <div className="text-center">
+                              <div className="text-2xl font-bold text-primary">{dept.questionCount}</div>
+                              <div className="text-xs text-muted-foreground font-medium">
+                                {dept.questionCount === 1 ? "pergunta" : "perguntas"}
                               </div>
                             </div>
-                            <div className="ml-8 space-y-1">
-                              {q.options.map((opt, idx) => (
-                                <div
-                                  key={idx}
-                                  className="flex items-center justify-between text-sm bg-muted rounded px-3 py-2"
-                                >
-                                  <span className="text-foreground">{opt.text}</span>
-                                  <span className="font-semibold text-primary">
-                                    +{opt.points} {opt.points === 1 ? "ponto" : "pontos"}
-                                  </span>
-                                </div>
-                              ))}
+                            <div className="text-center">
+                              <div className="text-2xl font-bold text-primary">{dept.maxPoints}</div>
+                              <div className="text-xs text-muted-foreground font-medium">
+                                {dept.maxPoints === 1 ? "ponto" : "pontos"}
+                              </div>
                             </div>
                           </div>
-                        ))}
+                        </div>
+
+                        {dept.questions.length > 0 && (
+                          <button
+                            onClick={() => toggleDepartment(dept.name)}
+                            className="mt-4 flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                          >
+                            {isExpanded ? (
+                              <>
+                                <ChevronUp className="w-4 h-4" />
+                                Ocultar perguntas
+                              </>
+                            ) : (
+                              <>
+                                <ChevronDown className="w-4 h-4" />
+                                Ver {dept.questions.length} {dept.questions.length === 1 ? "pergunta" : "perguntas"}
+                              </>
+                            )}
+                          </button>
+                        )}
                       </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
+
+                      {isExpanded && dept.questions.length > 0 && (
+                        <div className="border-t border-border bg-card p-5 space-y-4">
+                          {dept.questions.map((q) => (
+                            <div key={`${dept.name}-${q.id}`} className="space-y-2">
+                              <div className="flex items-start gap-2">
+                                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex-shrink-0">
+                                  {q.id}
+                                </span>
+                                <div className="flex-1">
+                                  <p className="text-sm font-medium text-foreground">{q.text}</p>
+                                  <p className="text-xs text-muted-foreground mt-1">{getQuestionTypeLabel(q.type)}</p>
+                                </div>
+                              </div>
+                              <div className="ml-8 space-y-1">
+                                {q.options.map((opt, idx) => (
+                                  <div
+                                    key={idx}
+                                    className="flex items-center justify-between text-sm bg-muted rounded px-3 py-2"
+                                  >
+                                    <span className="text-foreground">{opt.text}</span>
+                                    <span className="font-semibold text-primary">
+                                      +{opt.points} {opt.points === 1 ? "ponto" : "pontos"}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
             )}
           </div>
         </Card>
@@ -409,67 +409,44 @@ export default function StatisticsPage() {
                   </>
                 )}
               </button>
-            </div>            {/* Skills Statistics */}
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-semibold text-slate-900 flex items-center gap-2">
-                  <BarChart3 className="w-6 h-6 text-purple-600" />
-                  Habilidades
-                </h2>
-                <button
-                  onClick={() => setShowSkillsSection(!showSkillsSection)}
-                  className="flex items-center gap-2 text-sm font-medium text-purple-600 hover:text-purple-700 transition-colors px-3 py-2 rounded-lg hover:bg-purple-50"
-                >
-                  {showSkillsSection ? (
-                    <>
-                      <ChevronUp className="w-4 h-4" />
-                      Ocultar todos
-                    </>
-                  ) : (
-                    <>
-                      <ChevronDown className="w-4 h-4" />
-                      Mostrar todos
-                    </>
-                  )}
-                </button>
-              </div>
-              {showSkillsSection && (
-                <div className="grid gap-4">
+            </div>
+            {showSkillsSection && (
+              <div className="grid gap-4">
                 {skills.map((skill) => {
                   const isExpanded = expandedSkills.has(skill.name)
                   return (
                     <div
                       key={skill.name}
-                      className="bg-gradient-to-r from-purple-50 to-white border border-purple-200 rounded-lg overflow-hidden"
+                      className="bg-accent border border-border rounded-lg overflow-hidden"
                     >
-                      <div className="p-5 hover:bg-purple-50/50 transition-colors">
+                      <div className="p-5 hover:bg-muted transition-colors">
                         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
                           <div className="flex-1 space-y-2">
-                            <h3 className="text-lg font-semibold text-slate-900">{skill.name}</h3>
+                            <h3 className="text-lg font-semibold text-foreground">{skill.name}</h3>
                             {skill.description && (
-                              <p className="text-sm text-slate-600">{skill.description}</p>
+                              <p className="text-sm text-muted-foreground">{skill.description}</p>
                             )}
                           </div>
                           <div className="flex gap-6 md:gap-8 flex-shrink-0">
                             <div className="text-center">
-                              <div className="text-2xl font-bold text-purple-600">{skill.questionCount}</div>
-                              <div className="text-xs text-slate-600 font-medium">
+                              <div className="text-2xl font-bold text-primary">{skill.questionCount}</div>
+                              <div className="text-xs text-muted-foreground font-medium">
                                 {skill.questionCount === 1 ? "pergunta" : "perguntas"}
                               </div>
                             </div>
                             <div className="text-center">
-                              <div className="text-2xl font-bold text-emerald-600">{skill.maxPoints}</div>
-                              <div className="text-xs text-slate-600 font-medium">
+                              <div className="text-2xl font-bold text-primary">{skill.maxPoints}</div>
+                              <div className="text-xs text-muted-foreground font-medium">
                                 {skill.maxPoints === 1 ? "ponto" : "pontos"}
                               </div>
                             </div>
                           </div>
                         </div>
-                        
+
                         {skill.questions.length > 0 && (
                           <button
                             onClick={() => toggleSkill(skill.name)}
-                            className="mt-4 flex items-center gap-2 text-sm font-medium text-purple-600 hover:text-purple-700 transition-colors"
+                            className="mt-4 flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
                           >
                             {isExpanded ? (
                               <>
@@ -487,26 +464,26 @@ export default function StatisticsPage() {
                       </div>
 
                       {isExpanded && skill.questions.length > 0 && (
-                        <div className="border-t border-purple-200 bg-white p-5 space-y-4">
+                        <div className="border-t border-border bg-card p-5 space-y-4">
                           {skill.questions.map((q) => (
                             <div key={`${skill.name}-${q.id}`} className="space-y-2">
                               <div className="flex items-start gap-2">
-                                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-purple-100 text-purple-700 text-xs font-bold flex-shrink-0">
+                                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex-shrink-0">
                                   {q.id}
                                 </span>
                                 <div className="flex-1">
-                                  <p className="text-sm font-medium text-slate-900">{q.text}</p>
-                                  <p className="text-xs text-slate-500 mt-1">{getQuestionTypeLabel(q.type)}</p>
+                                  <p className="text-sm font-medium text-foreground">{q.text}</p>
+                                  <p className="text-xs text-muted-foreground mt-1">{getQuestionTypeLabel(q.type)}</p>
                                 </div>
                               </div>
                               <div className="ml-8 space-y-1">
                                 {q.options.map((opt, idx) => (
                                   <div
                                     key={idx}
-                                    className="flex items-center justify-between text-sm bg-slate-50 rounded px-3 py-2"
+                                    className="flex items-center justify-between text-sm bg-muted rounded px-3 py-2"
                                   >
-                                    <span className="text-slate-700">{opt.text}</span>
-                                    <span className="font-semibold text-emerald-600">
+                                    <span className="text-foreground">{opt.text}</span>
+                                    <span className="font-semibold text-primary">
                                       +{opt.points} {opt.points === 1 ? "ponto" : "pontos"}
                                     </span>
                                   </div>
@@ -520,56 +497,55 @@ export default function StatisticsPage() {
                   )
                 })}
               </div>
-              )}
-            </div>
+            )}
+          </div>
+        </Card>
 
-            {/* All Questions */}
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-semibold text-slate-900 flex items-center gap-2">
-                  <BarChart3 className="w-6 h-6 text-slate-600" />
-                  Todas as perguntas
-                </h2>
-                <button
-                  onClick={() => setShowQuestionsSection(!showQuestionsSection)}
-                  className="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-700 transition-colors px-3 py-2 rounded-lg hover:bg-slate-50"
-                >
-                  {showQuestionsSection ? (
-                    <>
-                      <ChevronUp className="w-4 h-4" />
-                      Ocultar todos
-                    </>
-                  ) : (
-                    <>
-                      <ChevronDown className="w-4 h-4" />
-                      Mostrar todos
-                    </>
-                  )}
-                </button>
-              </div>
-              {showQuestionsSection && (
-                <div className="grid gap-4">
+        {/* All Questions */}
+        <Card className="p-6 shadow-xl">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-semibold text-foreground flex items-center gap-2">
+                <BarChart3 className="w-6 h-6 text-primary" />
+                Todas as perguntas
+              </h2>
+              <button
+                onClick={() => setShowQuestionsSection(!showQuestionsSection)}
+                className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors px-3 py-2 rounded-lg hover:bg-accent"
+              >
+                {showQuestionsSection ? (
+                  <>
+                    <ChevronUp className="w-4 h-4" />
+                    Ocultar todos
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="w-4 h-4" />
+                    Mostrar todos
+                  </>
+                )}
+              </button>
+            </div>
+            {showQuestionsSection && (
+              <div className="grid gap-4">
                 {QUESTIONS.map((question) => {
                   const isExpanded = expandedQuestions.has(question.id)
                   return (
-                    <div
-                      key={question.id}
-                      className="bg-gradient-to-r from-slate-50 to-white border border-slate-200 rounded-lg overflow-hidden"
-                    >
+                    <Card key={question.id} className="shadow-md">
                       <div className="p-5">
                         <div className="space-y-3">
                           {/* Question Header */}
                           <div className="flex items-start gap-3">
-                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-200 text-slate-700 text-sm font-bold flex-shrink-0">
+                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary text-sm font-bold flex-shrink-0">
                               {question.id}
                             </span>
                             <div className="flex-1">
-                              <p className="text-base font-semibold text-slate-900">{question.text}</p>
+                              <p className="text-base font-semibold text-foreground">{question.text}</p>
                               <div className="flex items-center gap-2 mt-2">
-                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-200 text-slate-700">
+                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-muted text-foreground">
                                   {getQuestionTypeLabel(question.type)}
                                 </span>
-                                <span className="text-xs text-slate-500">
+                                <span className="text-xs text-muted-foreground">
                                   {question.options.length} {question.options.length === 1 ? "opção" : "opções"}
                                 </span>
                               </div>
@@ -579,7 +555,7 @@ export default function StatisticsPage() {
                           {/* Toggle Button */}
                           <button
                             onClick={() => toggleQuestion(question.id)}
-                            className="ml-11 flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-700 transition-colors"
+                            className="ml-11 flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
                           >
                             {isExpanded ? (
                               <>
@@ -598,7 +574,7 @@ export default function StatisticsPage() {
 
                       {/* Options */}
                       {isExpanded && (
-                        <div className="border-t border-slate-200 bg-white p-5">
+                        <div className="border-t border-border bg-accent p-5">
                           <div className="ml-11 space-y-2">
                             {question.options.map((option, idx) => {
                               const pointsEntries = Object.entries(option.points)
@@ -607,17 +583,17 @@ export default function StatisticsPage() {
                               return (
                                 <div
                                   key={idx}
-                                  className="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-2"
+                                  className="bg-card border border-border rounded-lg p-3 space-y-2"
                                 >
                                   <div className="flex items-start justify-between gap-3">
-                                    <p className="text-sm text-slate-700 flex-1 font-medium">{option.text}</p>
+                                    <p className="text-sm text-foreground flex-1 font-medium">{option.text}</p>
                                     {!hasPoints && (
-                                      <span className="text-xs text-slate-400 font-medium whitespace-nowrap">
+                                      <span className="text-xs text-muted-foreground font-medium whitespace-nowrap">
                                         Sem pontos
                                       </span>
                                     )}
                                   </div>
-                                  
+
                                   {hasPoints && (
                                     <div className="flex flex-wrap gap-2">
                                       {pointsEntries.map(([name, points]) => {
@@ -626,23 +602,19 @@ export default function StatisticsPage() {
                                         return (
                                           <div
                                             key={name}
-                                            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border ${
-                                              isDepartment
-                                                ? "bg-sky-50 border-sky-200"
-                                                : "bg-purple-50 border-purple-200"
-                                            }`}
+                                            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border ${isDepartment
+                                                ? "bg-primary/10 border-primary/20"
+                                                : "bg-secondary/10 border-secondary/20"
+                                              }`}
                                           >
-                                            <span className="text-xs text-slate-600 font-medium">{name}</span>
-                                            <span className={`text-xs font-bold ${
-                                              isDepartment ? "text-sky-700" : "text-purple-700"
-                                            }`}>
+                                            <span className="text-xs text-foreground font-medium">{name}</span>
+                                            <span className="text-xs font-bold text-primary">
                                               +{points}
                                             </span>
-                                            <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${
-                                              isDepartment
-                                                ? "bg-sky-100 text-sky-700"
-                                                : "bg-purple-100 text-purple-700"
-                                            }`}>
+                                            <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${isDepartment
+                                                ? "bg-primary/20 text-primary"
+                                                : "bg-secondary/20 text-foreground"
+                                              }`}>
                                               {type}
                                             </span>
                                           </div>
@@ -656,24 +628,20 @@ export default function StatisticsPage() {
                           </div>
                         </div>
                       )}
-                    </div>
+                    </Card>
                   )
                 })}
               </div>
-              )}
-            </div>
-
-            {/* Back Button */}
-            <div className="pt-6 border-t border-slate-200">
-              <Link href="/">
-                <Button variant="outline" className="border-slate-300 cursor-pointer">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Voltar para o Teste
-                </Button>
-              </Link>
-            </div>
+            )}
           </div>
         </Card>
+
+        <Link href="/">
+          <Button variant="outline" className="border-border cursor-pointer">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Voltar para o teste
+          </Button>
+        </Link>
       </div>
     </div>
   )
