@@ -158,19 +158,27 @@ export default function StatisticsPage() {
       })
     })
 
-    // Filter out departments and skills with no points
+    // Separate departments and skills with and without questions
     const departments = Object.values(departmentStats)
       .filter((stat) => stat.maxPoints > 0)
       .sort((a, b) => b.maxPoints - a.maxPoints)
+
+    const departmentsWithoutQuestions = Object.values(departmentStats)
+      .filter((stat) => stat.maxPoints === 0)
+      .sort((a, b) => a.name.localeCompare(b.name))
 
     const skills = Object.values(skillStats)
       .filter((stat) => stat.maxPoints > 0)
       .sort((a, b) => b.maxPoints - a.maxPoints)
 
-    return { departments, skills }
+    const skillsWithoutQuestions = Object.values(skillStats)
+      .filter((stat) => stat.maxPoints === 0)
+      .sort((a, b) => a.name.localeCompare(b.name))
+
+    return { departments, skills, departmentsWithoutQuestions, skillsWithoutQuestions }
   }
 
-  const { departments, skills } = calculateStatistics()
+  const { departments, skills, departmentsWithoutQuestions, skillsWithoutQuestions } = calculateStatistics()
 
   const [expandedDepts, setExpandedDepts] = useState<Set<string>>(new Set())
   const [expandedSkills, setExpandedSkills] = useState<Set<string>>(new Set())
@@ -182,6 +190,8 @@ export default function StatisticsPage() {
   const [showDepartmentsSection, setShowDepartmentsSection] = useState(true)
   const [showSkillsSection, setShowSkillsSection] = useState(true)
   const [showQuestionsSection, setShowQuestionsSection] = useState(true)
+  const [showDepartmentsWithoutQuestionsSection, setShowDepartmentsWithoutQuestionsSection] = useState(false)
+  const [showSkillsWithoutQuestionsSection, setShowSkillsWithoutQuestionsSection] = useState(false)
 
   const toggleDepartment = (name: string) => {
     setExpandedDepts((prev) => {
@@ -262,10 +272,16 @@ export default function StatisticsPage() {
           <Card className="p-6 text-center shadow-xl">
             <div className="text-3xl font-bold text-primary">{departments.length}</div>
             <div className="text-sm font-medium text-muted-foreground">Departamentos Avaliados</div>
+            <div className="text-xs text-muted-foreground mt-2">
+              {departmentsWithoutQuestions.length} sem perguntas
+            </div>
           </Card>
           <Card className="p-6 text-center shadow-xl">
             <div className="text-3xl font-bold text-primary">{skills.length}</div>
             <div className="text-sm font-medium text-muted-foreground">Habilidades Avaliadas</div>
+            <div className="text-xs text-muted-foreground mt-2">
+              {skillsWithoutQuestions.length} sem perguntas
+            </div>
           </Card>
         </div>
 
@@ -500,6 +516,116 @@ export default function StatisticsPage() {
             )}
           </div>
         </Card>
+
+        {/* Departments Without Questions */}
+        {departmentsWithoutQuestions.length > 0 && (
+          <Card className="p-6 shadow-xl">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-semibold text-foreground flex items-center gap-2">
+                  <BarChart3 className="w-6 h-6 text-muted-foreground" />
+                  Departamentos sem perguntas vinculadas
+                </h2>
+                <button
+                  onClick={() => setShowDepartmentsWithoutQuestionsSection(!showDepartmentsWithoutQuestionsSection)}
+                  className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors px-3 py-2 rounded-lg hover:bg-accent"
+                >
+                  {showDepartmentsWithoutQuestionsSection ? (
+                    <>
+                      <ChevronUp className="w-4 h-4" />
+                      Ocultar todos
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="w-4 h-4" />
+                      Mostrar todos ({departmentsWithoutQuestions.length})
+                    </>
+                  )}
+                </button>
+              </div>
+              {showDepartmentsWithoutQuestionsSection && (
+                <div className="grid gap-3">
+                  {departmentsWithoutQuestions.map((dept) => (
+                    <div
+                      key={dept.name}
+                      className="bg-accent/50 border border-border rounded-lg p-4"
+                    >
+                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+                        <div className="flex-1 space-y-1">
+                          <h3 className="text-base font-semibold text-foreground">{dept.name}</h3>
+                          {dept.description && (
+                            <p className="text-sm text-muted-foreground">{dept.description}</p>
+                          )}
+                        </div>
+                        <div className="flex gap-4 flex-shrink-0">
+                          <div className="text-center">
+                            <div className="text-xl font-bold text-muted-foreground">0</div>
+                            <div className="text-xs text-muted-foreground font-medium">perguntas</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </Card>
+        )}
+
+        {/* Skills Without Questions */}
+        {skillsWithoutQuestions.length > 0 && (
+          <Card className="p-6 shadow-xl">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-semibold text-foreground flex items-center gap-2">
+                  <BarChart3 className="w-6 h-6 text-muted-foreground" />
+                  Habilidades sem perguntas vinculadas
+                </h2>
+                <button
+                  onClick={() => setShowSkillsWithoutQuestionsSection(!showSkillsWithoutQuestionsSection)}
+                  className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors px-3 py-2 rounded-lg hover:bg-accent"
+                >
+                  {showSkillsWithoutQuestionsSection ? (
+                    <>
+                      <ChevronUp className="w-4 h-4" />
+                      Ocultar todos
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="w-4 h-4" />
+                      Mostrar todos ({skillsWithoutQuestions.length})
+                    </>
+                  )}
+                </button>
+              </div>
+              {showSkillsWithoutQuestionsSection && (
+                <div className="grid gap-3">
+                  {skillsWithoutQuestions.map((skill) => (
+                    <div
+                      key={skill.name}
+                      className="bg-accent/50 border border-border rounded-lg p-4"
+                    >
+                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+                        <div className="flex-1 space-y-1">
+                          <h3 className="text-base font-semibold text-foreground">{skill.name}</h3>
+                          {skill.description && (
+                            <p className="text-sm text-muted-foreground">{skill.description}</p>
+                          )}
+                        </div>
+                        <div className="flex gap-4 flex-shrink-0">
+                          <div className="text-center">
+                            <div className="text-xl font-bold text-muted-foreground">0</div>
+                            <div className="text-xs text-muted-foreground font-medium">perguntas</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </Card>
+        )}
 
         {/* All Questions */}
         <Card className="p-6 shadow-xl">
