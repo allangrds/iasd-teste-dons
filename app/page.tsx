@@ -383,8 +383,8 @@ export default function SpiritualGiftsTest() {
               <Mail className="w-4 h-4" />
               <span>
                 Sugestões:{" "}
-                <a href="mailto:wh6u5qli4@mozmail.com" className="text-primary hover:underline cursor-pointer">
-                  wh6u5qli4@mozmail.com
+                <a href="mailto:hm2lp3893@mozmail.com" className="text-primary hover:underline cursor-pointer">
+                  hm2lp3893@mozmail.com
                 </a>
               </span>
             </div>
@@ -611,8 +611,8 @@ export default function SpiritualGiftsTest() {
               <Mail className="w-4 h-4" />
               <span>
                 Sugestões:{" "}
-                <a href="mailto:esseemail@email.com" className="text-primary hover:underline">
-                  esseemail@email.com
+                <a href="mailto:hm2lp3893@mozmail.com" className="text-primary hover:underline">
+                  hm2lp3893@mozmail.com
                 </a>
               </span>
             </div>
